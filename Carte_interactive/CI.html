@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartes avec Itinéraire et Style</title>
+    <style>
+        /* Style global */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #f4f4f9; /* Arrière-plan clair et doux */
+        }
+
+        
+        /* Conteneur principal */
+        #container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        
+        /* Onglets */
+        #tabs {
+            display: flex;
+            background-color: #8c5218;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid white;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .tab:hover {
+            background-color: #c7a864;
+            transform: scale(1.05);
+        }
+
+        .tab.active {
+            background-color: #957c51;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+        }
+
+        
+        /* Conteneur des cartes */
+        #mapContainer {
+            flex: 1;
+            position: relative;
+        }
+
+        
+        /* Style des cartes */
+        .mapWrapper {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .mapWrapper.active {
+            display: block;
+        }
+
+        .map {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .mapWrapper.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background: white;
+        }
+
+
+        /* Barre de recherche */
+        .searchBox {
+            position: absolute;
+            top: 40px;
+            left : 525px;
+            z-index: 10;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            width: 30%;
+        }
+
+        .searchBox::placeholder {
+            color: #aaa;
+        }
+
+        .searchBox:focus {
+            border-color: #8c5218;
+            outline: none;
+            box-shadow: 0 0 5px rgba(116, 47, 2, 0.5);
+        }
+
+        
+        /* Bouton Communication (bulle) */
+        #communicationButton {
+            position: absolute;
+            bottom: 75px; /* En bas */ 
+            left: 10px; /*à droite */
+            z-index: 10;
+            padding: 5px 10px;
+            width: 80px;
+            height: 50px;
+            background-color: #8c5218;
+            color: white;
+            border: none;
+            border-radius: 65%; /* Rond */
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        
+        #communicationButton:hover{
+            background-color: #8c5218;
+        }
+
+        
+        /* Bouton Communication */
+        #communicationMenu {
+            position: fixed;
+            bottom: 150px;
+            left: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 1000;
+            display: none;
+        }
+
+        #communicationMenu button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: #eaa039;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        #communicationMenu button:hover {
+            background-color: #d6851b;
+        }
+
+        /* Boîte d'itinéraire */
+        .itineraireBox {
+            display: none;
+            position: absolute;
+            top: 105px;
+            right: 10px;
+            z-index: 10;
+            background-color: rgb(175, 147, 32);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 280px;
+        }
+
+        #itineraireBox input,
+        #itineraireBox select {
+            width: 88%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        #itineraireBox input:focus,
+        #itineraireBox select:focus {
+            border-color: #2196F3;
+            outline: none;
+            box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+        }
+
+        /* Bouton itinéraire */
+        .itineraireButton {
+            position: absolute; /* Position par rapport à #mapContainer */
+            top: 55px; /* Place le bouton à 10px du haut */
+            right: 10px; /* Place le bouton à 10px de la droite */
+            z-index: 100; /* Assure que le bouton est visible au-dessus de tout */
+            background-color: #f01818; /* Couleur de fond */
+            color: #fff; /* Couleur du texte */
+            padding: 10px 20px; /* Taille du bouton */
+            border-radius: 4px; /* Coins arrondis */
+            border: none; /* Supprime les bordures */
+            cursor: pointer; /* Affiche un curseur "main" */
+            font-size: 16px; /* Taille de la police */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
+            transition: background-color 0.3s ease; /* Effet lors du survol */
+        }
+        
+        .itineraireButton:hover {
+            background-color: #FF8A50;
+        }
+
+        /* Bouton de fermeture (croix) */
+        .closeItineraire {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #FF5722;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 15px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .closeItineraire:hover {
+            background-color: #FF8A50;
+            transform: scale(1.1);
+            color: red;
+        }
+
+        
+        /* Bouton Plein écran */
+        .fullscreenButton {
+            position: absolute;
+            bottom: 30px;
+            left: 10px;
+            z-index: 10;
+            padding: 10px;
+            background-color: #8c5218;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .fullscreenButton:hover {
+            background-color: #c98319;
+        }
+
+        
+        /* Infos sur l'itinéraire */
+        .routeInfo {
+            position: absolute;
+            top: 160px;
+            right: 20px;
+            z-index: 10;
+            background-color: rgb(38, 215, 31);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+
+    </style>
+    <script>
+        (g => {
+          var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+          b = b[c] || (b[c] = {});
+          var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => {
+            await (a = m.createElement("script"));
+            e.set("libraries", [...r] + "");
+            for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+            e.set("callback", c + ".maps." + q);
+            a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+            d[q] = f;
+            a.onerror = () => h = n(Error(p + " could not load."));
+            a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+            m.head.append(a);
+          }));
+          d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
+        })({
+          key: "AIzaSyBGa3cJ5lHEWiLcGZdcUlLH8muwMSu-aik", 
+          v: "weekly",
+          libraries: "places,marker, directions" 
+        });
+      </script>
+      
+      
+    
+
+</head>
+<body>
+            <div id="container">
+                <!-- Onglets pour naviguer entre les cartes -->  
+                <div id="tabs">
+                    <div class="tab active" onclick="showMap('mainMapWrapper')">Carte principale</div>
+                    <div class="tab" onclick="showMap('friendMapWrapper')">Carte d'ami</div>
+                    <div class="tab" onclick="showMap('myMapWrapper')">Ma carte</div>
+                </div>
+        
+                <!-- Conteneur des cartes -->
+                <div id="mapContainer">
+                    <!-- Carte principale -->
+                    <div id="mainMapWrapper" class="mapWrapper active">
+                        <div id="mainMap" class="map"></div>
+                        <input id="mainSearchBox" class="searchBox" placeholder="Rechercher...">
+                        <button class="fullscreenButton" onclick="toggleFullscreen('mainMapWrapper')">Plein écran</button>
+                        <button class="itineraireButton" onclick="toggleItineraireBox('Main')">Itinéraire</button>
+                        <div class="routeInfo" id="routeInfo"></div>
+                        <!-- Conteneur pour la boîte d'itinéraire -->
+                        <div id="itineraireContainerMain"></div>
+                    </div>
+                
+                    <!-- Carte d'ami -->
+                    <div id="friendMapWrapper" class="mapWrapper">
+                        <input id="friendSearchBox" class="searchBox" placeholder="Rechercher...">
+                        <div id="friendMap" class="map"></div>
+                        <button class="fullscreenButton" onclick="toggleFullscreen('friendMapWrapper')">Plein écran</button>
+                        <button class="itineraireButton" onclick="toggleItineraireBox('Friend')">Itinéraire</button>                        <div class="routeInfo" id="routeInfo"></div>
+                        <!-- Conteneur pour la boîte d'itinéraire -->
+                        <div id="itineraireContainerFriend"></div>
+                    </div>
+                
+                    <!-- Ma carte -->
+                    <div id="myMapWrapper" class="mapWrapper">
+                        <input id="mySearchBox" class="searchBox" placeholder="Rechercher...">
+                        <div id="myMap" class="map"></div>
+                        <button class="fullscreenButton" onclick="toggleFullscreen('myMapWrapper')">Plein écran</button>
+                        <button class="itineraireButton" onclick="toggleItineraireBox('My')">Itinéraire</button>                        <div class="routeInfo" id="routeInfo"></div>
+                        <!-- Conteneur pour la boîte d'itinéraire -->
+                        <div id="itineraireContainerMy"></div>
+                    </div>
+                </div>
+                
+            </div>
+
+
+        <div id="communicationButton" onclick="toggleCommunicationMenu()">
+            <button  onclick="Communication()" >
+        </div>
+        
+        <div id="communicationMenu" class="hidden">
+            <button onclick="openChat()">Chat</button>
+            <button onclick="viewFriends()">Amis</button>
+            <button onclick="manageGroups()">Groupes</button>
+        </div>
+        
+        
+    <script>
+        
+
+        let directionsService = {}; // Contient les services d'itinéraire pour chaque carte
+        let directionsRenderer = {}; // Contient les rendus d'itinéraire pour chaque carte
+        let maps = {}; // Contient les cartes associées aux identifiants
+        
+        
+        
+        // Initialise chaque carte avec un service et un rendu d'itinéraire
+        async function initMap() {
+            try {
+                console.log("Initialisation de l'API Google Maps...");
+                
+                const { Map } = await google.maps.importLibrary("maps");
+                const { PlacesService, SearchBox } = await google.maps.importLibrary("places");
+        
+                // Initialisation des cartes
+                const mainMap = new Map(document.getElementById("mainMap"), {
+                    center: { lat: 46.603354, lng: 1.888334 }, // France
+                    zoom: 6,
+                });
+        
+                const friendMap = new Map(document.getElementById("friendMap"), {
+                    center: { lat: 46.603354, lng: 1.888334 },
+                    zoom: 6,
+                });
+        
+                const myMap = new Map(document.getElementById("myMap"), {
+                    center: { lat: 46.603354, lng: 1.888334 },
+                    zoom: 6,
+                });
+        
+                // Stockage des cartes
+                maps = { mainMap, friendMap, myMap };
+        
+                // Initialisation de SearchBox pour chaque carte
+                createSearchBox(mainMap, "mainSearchBox");
+                createSearchBox(friendMap, "friendSearchBox");
+                createSearchBox(myMap, "mySearchBox");
+        
+                console.log("Cartes et barres de recherche initialisées !");
+            } catch (error) {
+                console.error("Erreur lors de l'initialisation de Google Maps :", error);
+            }
+        }
+        
+
+        //barre de recherche
+        function createSearchBox(map, searchBoxId) {
+            const searchBoxElement = document.getElementById(searchBoxId);
+            const searchBox = new google.maps.places.SearchBox(searchBoxElement);
+        
+            // Associer le SearchBox aux limites actuelles de la carte
+            map.addListener("bounds_changed", () => {
+                searchBox.setBounds(map.getBounds());
+            });
+        
+            // Ajouter des marqueurs pour les résultats
+            const markers = [];
+            searchBox.addListener("places_changed", () => {
+                const places = searchBox.getPlaces();
+                if (!places || places.length === 0) {
+                    console.error("Aucun lieu trouvé !");
+                    return;
+                }
+        
+                // Supprime les anciens marqueurs
+                markers.forEach(marker => marker.setMap(null));
+                markers.length = 0;
+        
+                // Ajuste les limites de la carte
+                const bounds = new google.maps.LatLngBounds();
+                places.forEach(place => {
+                    if (!place.geometry || !place.geometry.location) {
+                        console.error("Lieu sans géométrie :", place);
+                        return;
+                    }
+        
+                    // Ajouter un marqueur pour chaque lieu
+                    markers.push(
+                        new google.maps.Marker({
+                            map: map,
+                            position: place.geometry.location,
+                            title: place.name,
+                        })
+                    );
+        
+                    if (place.geometry.viewport) {
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        }
+        
+        // Fonction pour créer une carte associée à un champ de recherche
+        function createMap(mapId, searchBoxId) {
+            const map = maps[mapId];
+            const searchBox = new google.maps.places.SearchBox(document.getElementById(searchBoxId));
+            console.log(searchBox);
+        
+            searchBox.addListener("places_changed", () => {
+                console.log("places_changed triggered");
+                const places = searchBox.getPlaces();
+                if (!places || places.length === 0) {
+                    console.error("Aucun lieu trouvé.");
+                    return;
+                }
+                const bounds = new google.maps.LatLngBounds();
+                places.forEach((place) => {
+                    if (!place.geometry || !place.geometry.location) {
+                        console.error("Lieu sans géométrie :", place);
+                        return;
+                    }
+                    new google.maps.Marker({
+                        map: map,
+                        position: place.geometry.location,
+                        title: place.name,
+                    });
+                    bounds.extend(place.geometry.location);
+                });
+                map.fitBounds(bounds);
+            });
+        
+            return map;
+        }
+         
+        function showMap(mapWrapperId) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.mapWrapper').forEach(wrapper => wrapper.classList.remove('active'));
+
+            document.querySelector(`.tab[onclick="showMap('${mapWrapperId}')"]`).classList.add('active');
+            document.getElementById(mapWrapperId).classList.add('active');
+
+            const mapId = mapWrapperId.replace('Wrapper', '');
+            google.maps.event.trigger(maps[mapId], 'resize');
+        }
+
+        function addMarkersToMap(map) {
+            locations.forEach(location => {
+                new google.maps.Marker({
+                    position: { lat: location.lat, lng: location.lng },
+                    map,
+                    title: location.name,
+                });
+            });
+        }
+
+        function addCustomMarkers(map, locations) {
+            // Ajoute un marqueur pour chaque lieu de la liste "locations"
+            locations.forEach(location => {
+                const marker = new google.maps.Marker({
+                    position: { lat: location.lat, lng: location.lng },
+                    map: map,
+                    title: location.name, // Nom affiché dans l'info-bulle
+                    icon: location.icon || null, // Icône personnalisée (null = icône par défaut)
+                });
+
+                // Ajoute une fenêtre d'information si une description est fournie
+                if (location.description) {
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `
+                            <div style="font-size: 14px;">
+                                <strong>${location.name}</strong>
+                                <p>${location.description}</p>
+                            </div>
+                        `,
+                    });
+
+                    // Affiche la fenêtre au clic sur le marqueur
+                    marker.addListener("click", () => {
+                        infoWindow.open(map, marker);
+                    });
+                }
+            });
+        }
+        
+        function toggleFullscreen(mapWrapperId) {
+            const wrapper = document.getElementById(mapWrapperId);
+            wrapper.classList.toggle('fullscreen');
+        }
+
+        
+        /* itinairaire */
+        function toggleItineraireBox(boxId) {
+            console.log(`Tentative d'ouverture de la boîte : ${boxId}`);
+            const box = document.getElementById(`itineraireBox${boxId}`);
+        
+            if (!box) {
+                console.error(`Boîte d'itinéraire introuvable pour : ${boxId}`);
+                return;
+            }
+        
+            const isDisplayed = box.style.display === "block";
+            console.log(`La boîte ${boxId} est actuellement affichée : ${isDisplayed}`);
+        
+            // Alterne l'affichage
+            box.style.display = isDisplayed ? "none" : "block";
+        
+            // Ferme toutes les autres boîtes
+            document.querySelectorAll('.itineraireBox').forEach((otherBox) => {
+                if (otherBox.id !== `itineraireBox${boxId}`) {
+                    otherBox.style.display = "none";
+                }
+            });
+        }
+             
+        function createItineraireBox(boxId) {
+            const itineraireBoxHTML = `
+                <div id="itineraireBox${boxId}" class="itineraireBox">
+                    <button class="closeItineraire" onclick="closeItineraireBox('${boxId}')">&#10005;</button>
+                    <input type="text" id="origin${boxId}" placeholder="Point de départ">
+                    <input type="text" id="destination${boxId}" placeholder="Destination">
+                    <select id="travelMode${boxId}">
+                        <option value="DRIVING">Voiture</option>
+                        <option value="WALKING">Marche</option>
+                        <option value="BICYCLING">Vélo</option>
+                        <option value="TRANSIT">Transports en commun</option>
+                    </select>
+                    <button onclick="calculateRoute('${boxId}')">Calculer</button>
+                </div>
+            `;
+        
+            // Configuration de l'autocomplétion avec gestion des erreurs
+            setTimeout(async () => {
+                try {
+                    console.log(`Chargement de l'autocomplétion pour ${boxId}...`);
+        
+                    // Charge la bibliothèque Places
+                    const { Autocomplete } = await google.maps.importLibrary("places");
+        
+                    const originInput = document.getElementById(`origin${boxId}`);
+                    const destinationInput = document.getElementById(`destination${boxId}`);
+        
+                    if (originInput && destinationInput) {
+                        new Autocomplete(originInput); // Initialise l'autocomplétion pour le départ
+                        new Autocomplete(destinationInput); // Initialise l'autocomplétion pour la destination
+                        console.log(`Autocomplétion activée pour ${boxId}`);
+                    } else {
+                        console.error(`Les champs d'entrée pour ${boxId} sont introuvables.`);
+                    }
+                } catch (error) {
+                    console.error(`Erreur lors de l'initialisation de l'autocomplétion pour ${boxId}:`, error);
+                }
+            }, 500);
+        
+            return itineraireBoxHTML;
+        }
+        
+        async function calculateRoute(mapId) {
+            try {
+                const originInput = document.getElementById(`origin${mapId}`);
+                const destinationInput = document.getElementById(`destination${mapId}`);
+                const travelModeInput = document.getElementById(`travelMode${mapId}`);
+        
+                const origin = originInput.value;
+                const destination = destinationInput.value;
+                const travelMode = travelModeInput.value;
+        
+                if (!origin || !destination) {
+                    alert("Veuillez saisir un point de départ et une destination !");
+                    return;
+                }
+        
+                if (!directionsService[mapId] || !directionsRenderer[mapId]) {
+                    console.error(`Les services d'itinéraire ne sont pas initialisés pour ${mapId}`);
+                    return;
+                }
+        
+                // Calcul de l'itinéraire
+                const response = await directionsService[mapId].route({
+                    origin: { query: origin },
+                    destination: { query: destination },
+                    travelMode: google.maps.TravelMode[travelMode],
+                });
+        
+                directionsRenderer[mapId].setDirections(response);
+                console.log(`Itinéraire calculé pour ${mapId}`);
+            } catch (error) {
+                console.error(`Erreur lors du calcul de l'itinéraire pour ${mapId}:`, error);
+                alert("Erreur lors du calcul de l'itinéraire. Essayez d'autres lieux.");
+            }
+        }
+           
+        function closeItineraireBox(boxId) {
+            const box = document.getElementById(`itineraireBox${boxId}`);
+            box.style.display = "none";
+        }
+        
+
+        /* bouton communication */
+        function toggleCommunicationMenu() {
+            const menu = document.getElementById("communicationMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+
+        function openChat() {
+            alert("Ouvrir le chat !");
+        }
+
+        function viewFriends() {
+            alert("Afficher les amis !");
+        }
+
+        function manageGroups() {
+            alert("Gérer les groupes !");
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            console.log("DOM entièrement chargé, initialisation de l'application...");
+            await initMap();
+        
+            // Créez les boîtes d'itinéraire
+            const maps = ['Main', 'Friend', 'My'];
+            for (const mapId of maps) {
+                const container = document.getElementById(`itineraireContainer${mapId}`);
+                if (container) {
+                    container.innerHTML = createItineraireBox(mapId);
+                } else {
+                    console.error(`Le conteneur pour ${mapId} est introuvable`);
+                }
+            }
+        });
+        
+        
+        window.initMap = initMap;
+
+    </script>
+</body>
+</html>
