@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RISE - Découvrez leurs aventures</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ECECEC;
+        }
+        .banner {
+            background-image: url('C:/Users/mathi/Desktop/RISE Project/Front End Rise/images page temoignage/beautiful-pink-purple-blue-gradient-600nw-2592329663.webp');
+            background-size: cover;
+            background-position: center;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            font-size: 2em;
+            font-weight: bold;
+            overflow: hidden;
+        }
+        .scrolling-text {
+            display: inline-block;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            animation: scroll-to-center 3s ease-in-out forwards;
+            white-space: nowrap;
+        }
+        @keyframes scroll-to-center {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+        .banner span {
+            color: #c42727;
+        }
+        .founders, .vision {
+            text-align: center;
+            font-size: 2.5em; /* Augmentation de la taille de la police */
+            color: #e40101;
+            margin-top: 20px;
+            margin-bottom: 70px; /* Ajout d'une marge inférieure */
+            font-weight: bold; /* Mise en gras */
+        }
+        .vision {
+            margin-top: 100px; /* Augmentation de la marge supérieure */
+        }
+        .container {
+            display: flex;
+            gap: 80px; /* Augmentation de l'espacement entre les cartes */
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .flip-card {
+            background-color: transparent;
+            width: 250px;
+            height: 300px;
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        .flip-card-front {
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .flip-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .flip-card-back {
+            background-color: #333;
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+        }
+        .name {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 22px;
+            color: #c00;
+        }
+        .linkedin {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #0077b5;
+            text-decoration: none;
+        }
+        .linkedin:hover {
+            text-decoration: underline;
+        }
+        /* Cadrant avec coins gris et bordure blanche */
+        .custom-box {
+            padding: 20px; /* Espacement intérieur */
+            background-color: #ffffff; /* Fond blanc pour le cadrant */
+            border: 5px solid #f0f0f0; /* Bordure grise légère */
+            border-radius: 20px; /* Coins arrondis */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Ombre pour profondeur */
+            max-width: 80%; /* Largeur maximale du cadrant */
+            margin: 20px auto; /* Centrer le cadrant */
+            position: relative;
+        }
+        /* Coins gris personnalisés */
+        .custom-box:before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 3px solid #cccccc; /* Bordure supplémentaire pour les coins gris */
+            border-radius: 25px; /* Coins légèrement plus arrondis pour l'effet */
+            z-index: -1; /* Positionner derrière le texte */
+        }
+        .custom-box p {
+            color: #333; /* Couleur du texte */
+            font-size: 25px; /* Taille du texte */
+            line-height: 1.6; /* Espacement des lignes */
+            text-align: justify; /* Justifier le texte */
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="scrolling-text">
+            <span>RISE:</span> Qui sommes nous ?
+        </div>
+    </div>
+    <div class="founders">
+        4 Fondateurs :
+    </div>
+    <div class="container">
+        <!-- Schmit Léonie -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://primary.jwwb.nl/public/g/c/w/temp-pdlrlsxjwvkbgyallwla/moi_zob-removebg-preview-high.png?enable-io=true&enable=upscale&crop=413%2C413%2Cx0%2Cy21%2Csafe&width=248&height=248" alt="Schmit Léonie">
+                </div>
+                <div class="flip-card-back">
+                    <p>Schmit Léonie - Fondatrice, responsable du projet et stratégie</p>
+                </div>
+            </div>
+            <div class="name">Schmit Léonie</div>
+            <a class="linkedin" href="https://linkedin.com/in/leonie-schmit-7248b5259" target="_blank">Voir sur LinkedIn</a>
+        </div>
+        <!-- Levrot Mathis -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://primary.jwwb.nl/public/g/c/w/temp-pdlrlsxjwvkbgyallwla/image-high-pkdfe3.png?enable-io=true&enable=upscale&crop=436%2C436%2Cx0%2Cy0%2Csafe&width=247&height=247" alt="Levrot Mathis">
+                </div>
+                <div class="flip-card-back">
+                    <p>Levrot Mathis - Développeur web et designer, codeur</p>
+                </div>
+            </div>
+            <div class="name">Levrot Mathis</div>
+            <a class="linkedin" href="https://linkedin.com/in/mathis-levrot-ba2110252/" target="_blank">Voir sur LinkedIn</a>
+        </div>
+        <!-- Remillat Axel -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://primary.jwwb.nl/public/g/c/w/temp-pdlrlsxjwvkbgyallwla/axel-removebg-preview-high.png?enable-io=true&enable=upscale&crop=433%2C433%2Cx0%2Cy72%2Csafe&width=248&height=248" alt="Remillat Axel">
+                </div>
+                <div class="flip-card-back">
+                    <p>Remillat Axel - Développeur de la carte universitaire, codeur et designer</p>
+                </div>
+            </div>
+            <div class="name">Remillat Axel</div>
+            <a class="linkedin" href="https://linkedin.com/in/axel-remillatesmelyon" target="_blank">Voir sur LinkedIn</a>
+        </div>
+        <!-- Roux Tanguy -->
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="https://primary.jwwb.nl/public/g/c/w/temp-pdlrlsxjwvkbgyallwla/tanguy-removebg-preview-high-0t034e.png?enable-io=true&enable=upscale&crop=433%2C433%2Cx0%2Cy91%2Csafe&width=248&height=248" alt="Roux Tanguy">
+                </div>
+                <div class="flip-card-back">
+                    <p>Roux Tanguy - Responsable financier et business</p>
+                </div>
+            </div>
+            <div class="name">Roux Tanguy</div>
+            <a class="linkedin" href="https://www.linkedin.com/in/roux-tanguy" target="_blank">Voir sur LinkedIn</a>
+        </div>
+    </div>
+    <div class="vision">
+        Notre Vision
+    </div>
+    <!-- Section avec le cadrant personnalisé -->
+    <div class="custom-box">
+        <p>Nous sommes quatre étudiants de l'ESME Lyon, promotion 2027, et nous travaillons sur un projet destiné à accompagner les étudiants de notre école dans leur préparation au semestre international en quatrième année. Notre objectif principal est de faciliter l'accès à des informations précises sur les universités partenaires, en mettant à disposition une carte interactive regroupant ces établissements et toutes les données pertinentes pour chaque destination.</p>
+        <p>Mais notre ambition ne s'arrête pas là : nous souhaitons aussi élargir ce projet en incluant une deuxième carte interactive, dédiée aux voyages personnels des étudiants. Cette carte, alimentée par les retours d'expériences des étudiants eux-mêmes, permettra de partager des conseils, des recommandations et des anecdotes utiles pour tout type de voyage à l'étranger, qu'il soit académique ou personnel.</p>
+        <p>Ainsi, notre projet vise à créer une plateforme communautaire, accessible à tous, qui centralise des informations pratiques et enrichies par la participation des étudiants, afin de faciliter les mobilités internationales et les aventures personnelles.</p>
+    </div>
+</body>
+</html>
