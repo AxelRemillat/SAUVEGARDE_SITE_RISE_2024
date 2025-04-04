@@ -1,0 +1,118 @@
+CREATE TABLE Format (
+    id_format INT AUTO_INCREMENT PRIMARY KEY,
+    nom_format VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE Pays (
+    id_pays INT AUTO_INCREMENT PRIMARY KEY,
+    Visa VARCHAR(255) NOT NULL,
+    Securite_pays VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Etudiant (
+    id_etudiant INT AUTO_INCREMENT PRIMARY KEY,
+    Promo VARCHAR(4) NOT NULL,
+    Nom TEXT,
+    Prenom TEXT,
+    Age VARCHAR(2),
+    id_note INT,
+    FOREIGN KEY (id_note) REFERENCES Note(id_note)
+);
+
+CREATE TABLE Note (
+    id_note INT AUTO_INCREMENT PRIMARY KEY,
+    Note_ielts VARCHAR(4),
+    Moyenne VARCHAR(5)
+);
+
+CREATE TABLE Niveau_ielts (
+    id_ielts INT AUTO_INCREMENT PRIMARY KEY,
+    Ielts_min VARCHAR(2),
+    Ielts_max VARCHAR(2),
+    Ielts_unique BOOLEAN
+);
+
+CREATE TABLE Budget (
+    id_budget INT AUTO_INCREMENT PRIMARY KEY,
+    Surcout_academique VARCHAR(255),
+    Cout_semestre VARCHAR(255)
+);
+
+CREATE TABLE Caracteristique (
+    id_caracteristique INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre_etudiant VARCHAR(50),
+    Nombre_campus VARCHAR(50),
+    Date_fondation DATE,
+    Disponibilite BOOLEAN NOT NULL,
+    Periode_semestre VARCHAR(50) NOT NULL,
+    Date_enregistrement DATE
+);
+
+CREATE TABLE PlageEtudiants (
+    id_plage INT AUTO_INCREMENT PRIMARY KEY,
+    libelle VARCHAR(50) NOT NULL
+);
+
+INSERT INTO PlageEtudiants (libelle) VALUES
+('0 à 5'),
+('5 à 15'),
+('15 et plus'),
+('nombre exact');
+
+CREATE TABLE Localisation (
+    id_localisation INT AUTO_INCREMENT PRIMARY KEY,
+    Continent VARCHAR(50) NOT NULL,
+    adresse VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE Ville (
+    id_ville INT AUTO_INCREMENT PRIMARY KEY,
+    Logement VARCHAR(255),
+    Securite_ville VARCHAR(255),
+    id_pays INT,
+    FOREIGN KEY (id_pays) REFERENCES Pays(id_pays)
+);
+
+CREATE TABLE Uni (
+    id_uni INT AUTO_INCREMENT PRIMARY KEY,
+    Nom VARCHAR(100) NOT NULL,
+    id_ielts INT,
+    id_ville INT,
+    id_budget INT,
+    id_caracteristique INT,
+    id_localisation INT,
+    id_plage INT,
+    FOREIGN KEY (id_ielts) REFERENCES Niveau_ielts(id_ielts),
+    FOREIGN KEY (id_ville) REFERENCES Ville(id_ville),
+    FOREIGN KEY (id_budget) REFERENCES Budget(id_budget),
+    FOREIGN KEY (id_caracteristique) REFERENCES Caracteristique(id_caracteristique),
+    FOREIGN KEY (id_localisation) REFERENCES Localisation(id_localisation),
+    FOREIGN KEY (id_plage) REFERENCES PlageEtudiants(id_plage)
+);
+
+CREATE TABLE Témoignage (
+    id_temoignage INT AUTO_INCREMENT PRIMARY KEY,
+    Valide BOOLEAN DEFAULT FALSE,
+    Dates DATE,
+    Contenue TEXT,
+    id_etudiant INT,
+    id_format INT,
+    FOREIGN KEY (id_etudiant) REFERENCES Etudiant(id_etudiant),
+    FOREIGN KEY (id_format) REFERENCES Format(id_format)
+);
+
+CREATE TABLE Vouloir (
+    id_etudiant INT,
+    id_uni INT,
+    PRIMARY KEY (id_etudiant, id_uni),
+    FOREIGN KEY (id_etudiant) REFERENCES Etudiant(id_etudiant),
+    FOREIGN KEY (id_uni) REFERENCES Uni(id_uni)
+);
+
+CREATE TABLE Affecter (
+    id_etudiant INT,
+    id_uni INT,
+    PRIMARY KEY (id_etudiant, id_uni),
+    FOREIGN KEY (id_etudiant) REFERENCES Etudiant(id_etudiant),
+    FOREIGN KEY (id_uni) REFERENCES Uni(id_uni)
+);
