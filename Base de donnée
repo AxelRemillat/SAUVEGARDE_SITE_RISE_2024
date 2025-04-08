@@ -3,20 +3,19 @@ CREATE TABLE Format (
     nom_format VARCHAR(50) NOT NULL UNIQUE
 );
 
+INSERT INTO Format (nom_format)
+VALUES 
+('Vidéo'),
+('Texte'),
+('PDF'),
+('Image'),
+('Audio');
+
 CREATE TABLE Pays (
     id_pays INT AUTO_INCREMENT PRIMARY KEY,
+    Nom_pays VARCHAR(255) NOT NULL,
     Visa VARCHAR(255) NOT NULL,
     Securite_pays VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE Etudiant (
-    id_etudiant INT AUTO_INCREMENT PRIMARY KEY,
-    Promo VARCHAR(4) NOT NULL,
-    Nom TEXT,
-    Prenom TEXT,
-    Age VARCHAR(2),
-    id_note INT,
-    FOREIGN KEY (id_note) REFERENCES Note(id_note)
 );
 
 CREATE TABLE Note (
@@ -41,7 +40,7 @@ CREATE TABLE Budget (
 CREATE TABLE Caracteristique (
     id_caracteristique INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_etudiant VARCHAR(50),
-    Nombre_campus VARCHAR(50),
+    Nombre_campus int,
     Date_fondation DATE,
     Disponibilite BOOLEAN NOT NULL,
     Periode_semestre VARCHAR(50) NOT NULL,
@@ -65,8 +64,19 @@ CREATE TABLE Localisation (
     adresse VARCHAR(150) NOT NULL
 );
 
+CREATE TABLE Etudiant (
+    id_etudiant INT AUTO_INCREMENT PRIMARY KEY,
+    Promo VARCHAR(4) NOT NULL,
+    Nom TEXT,
+    Prenom TEXT,
+    Date_de_naissance Date,
+    id_note INT,
+    FOREIGN KEY (id_note) REFERENCES Note(id_note)
+);
+
 CREATE TABLE Ville (
     id_ville INT AUTO_INCREMENT PRIMARY KEY,
+    Nom_ville VARCHAR(255) NOT NULL,
     Logement VARCHAR(255),
     Securite_ville VARCHAR(255),
     id_pays INT,
@@ -75,7 +85,7 @@ CREATE TABLE Ville (
 
 CREATE TABLE Uni (
     id_uni INT AUTO_INCREMENT PRIMARY KEY,
-    Nom VARCHAR(100) NOT NULL,
+    Nom_uni VARCHAR(100) NOT NULL,
     id_ielts INT,
     id_ville INT,
     id_budget INT,
