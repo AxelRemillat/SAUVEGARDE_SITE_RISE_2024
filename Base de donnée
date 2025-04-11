@@ -1,128 +1,100 @@
-CREATE TABLE Format (
-    id_format INT AUTO_INCREMENT PRIMARY KEY,
-    nom_format VARCHAR(50) NOT NULL UNIQUE
+CREATE DATABASE rise;
+USE rise;
+
+CREATE TABLE Student (
+    Id_student INT PRIMARY KEY AUTO_INCREMENT,
+    Year INT,
+    Last_name VARCHAR(100),
+    First_name VARCHAR(100),
+    Age INT,
+    IELTS_score DECIMAL(3,1),
+    GPA DECIMAL(4,2)
 );
 
-INSERT INTO Format (nom_format)
-VALUES 
-('Vidéo'),
-('Texte'),
-('PDF'),
-('Image'),
-('Audio');
-
-CREATE TABLE Pays (
-    id_pays INT AUTO_INCREMENT PRIMARY KEY,
-    Nom_pays VARCHAR(255) NOT NULL,
-    Visa VARCHAR(255) NOT NULL,
-    Securite_pays VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE Note (
-    id_note INT AUTO_INCREMENT PRIMARY KEY,
-    Note_ielts VARCHAR(4),
-    Moyenne VARCHAR(5)
-);
-
-CREATE TABLE Niveau_ielts (
-    id_ielts INT AUTO_INCREMENT PRIMARY KEY,
-    Ielts_min VARCHAR(2),
-    Ielts_max VARCHAR(2),
-    Ielts_unique BOOLEAN
-);
-
-CREATE TABLE Budget (
-    id_budget INT AUTO_INCREMENT PRIMARY KEY,
-    Surcout_academique VARCHAR(255),
-    Cout_semestre VARCHAR(255)
-);
-
-CREATE TABLE Caracteristique (
-    id_caracteristique INT AUTO_INCREMENT PRIMARY KEY,
-    Nombre_etudiant VARCHAR(50),
-    Nombre_campus int,
-    Date_fondation DATE,
-    Disponibilite BOOLEAN NOT NULL,
-    Periode_semestre VARCHAR(50) NOT NULL,
-    Date_enregistrement DATE
-);
-
-CREATE TABLE PlageEtudiants (
-    id_plage INT AUTO_INCREMENT PRIMARY KEY,
-    libelle VARCHAR(50) NOT NULL
-);
-
-INSERT INTO PlageEtudiants (libelle) VALUES
-('0 à 5'),
-('5 à 15'),
-('15 et plus'),
-('nombre exact');
-
-CREATE TABLE Localisation (
-    id_localisation INT AUTO_INCREMENT PRIMARY KEY,
-    Continent VARCHAR(50) NOT NULL,
-    adresse VARCHAR(150) NOT NULL
-);
-
-CREATE TABLE Etudiant (
-    id_etudiant INT AUTO_INCREMENT PRIMARY KEY,
-    Promo VARCHAR(4) NOT NULL,
-    Nom TEXT,
-    Prenom TEXT,
-    Date_de_naissance Date,
-    id_note INT,
-    FOREIGN KEY (id_note) REFERENCES Note(id_note)
-);
-
-CREATE TABLE Ville (
-    id_ville INT AUTO_INCREMENT PRIMARY KEY,
-    Nom_ville VARCHAR(255) NOT NULL,
-    Logement VARCHAR(255),
-    Securite_ville VARCHAR(255),
-    id_pays INT,
-    FOREIGN KEY (id_pays) REFERENCES Pays(id_pays)
+CREATE TABLE Testimony (
+    Id_testimony INT PRIMARY KEY AUTO_INCREMENT,
+    Validated BOOLEAN,
+    Dates DATE,
+    Content TEXT,
+    Audio VARCHAR(255),
+    PDF VARCHAR(255),
+    Link VARCHAR(255),
+    Video VARCHAR(255),
+    Id_student INT,
+    FOREIGN KEY (Id_student) REFERENCES Student(Id_student)
 );
 
 CREATE TABLE Uni (
-    id_uni INT AUTO_INCREMENT PRIMARY KEY,
-    Nom_uni VARCHAR(100) NOT NULL,
-    id_ielts INT,
-    id_ville INT,
-    id_budget INT,
-    id_caracteristique INT,
-    id_localisation INT,
-    id_plage INT,
-    FOREIGN KEY (id_ielts) REFERENCES Niveau_ielts(id_ielts),
-    FOREIGN KEY (id_ville) REFERENCES Ville(id_ville),
-    FOREIGN KEY (id_budget) REFERENCES Budget(id_budget),
-    FOREIGN KEY (id_caracteristique) REFERENCES Caracteristique(id_caracteristique),
-    FOREIGN KEY (id_localisation) REFERENCES Localisation(id_localisation),
-    FOREIGN KEY (id_plage) REFERENCES PlageEtudiants(id_plage)
+    Id_uni INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100),
+    Academic_surcharge DECIMAL(10,2),
+    Semester_cost DECIMAL(10,2),
+    IELTS_min DECIMAL(3,1),
+    IELTS_max DECIMAL(3,1),
+    Unique_IELTS DECIMAL(3,1) ,
+    Number_of_students INT,
+    Number_of_campuses INT,
+    Founding_date DATE,
+    Availability BOOLEAN,
+    Semester_period VARCHAR(100),
+    Registration_date DATE
 );
 
-CREATE TABLE Témoignage (
-    id_temoignage INT AUTO_INCREMENT PRIMARY KEY,
-    Valide BOOLEAN DEFAULT FALSE,
-    Dates DATE,
-    Contenue TEXT,
-    id_etudiant INT,
-    id_format INT,
-    FOREIGN KEY (id_etudiant) REFERENCES Etudiant(id_etudiant),
-    FOREIGN KEY (id_format) REFERENCES Format(id_format)
+CREATE TABLE Wish (
+    Id_student INT,
+    Id_uni INT,
+    PRIMARY KEY (Id_student, Id_uni),
+    FOREIGN KEY (Id_student) REFERENCES Student(Id_student),
+    FOREIGN KEY (Id_uni) REFERENCES Uni(Id_uni)
 );
 
-CREATE TABLE Vouloir (
-    id_etudiant INT,
-    id_uni INT,
-    PRIMARY KEY (id_etudiant, id_uni),
-    FOREIGN KEY (id_etudiant) REFERENCES Etudiant(id_etudiant),
-    FOREIGN KEY (id_uni) REFERENCES Uni(id_uni)
+CREATE TABLE Assign (
+    Id_student INT,
+    Id_uni INT,
+    PRIMARY KEY (Id_student, Id_uni),
+    FOREIGN KEY (Id_student) REFERENCES Student(Id_student),
+    FOREIGN KEY (Id_uni) REFERENCES Uni(Id_uni)
 );
 
-CREATE TABLE Affecter (
-    id_etudiant INT,
-    id_uni INT,
-    PRIMARY KEY (id_etudiant, id_uni),
-    FOREIGN KEY (id_etudiant) REFERENCES Etudiant(id_etudiant),
-    FOREIGN KEY (id_uni) REFERENCES Uni(id_uni)
+CREATE TABLE Uni_year (
+    Id_uni INT,
+    Name VARCHAR(100),
+    Academic_surcharge DECIMAL(10,2),
+    Semester_cost DECIMAL(10,2),
+    IELTS_min DECIMAL(3,1),
+    IELTS_max DECIMAL(3,1),
+    Unique_IELTS DECIMAL(3,1),
+    Number_of_students INT,
+    Number_of_campuses INT,
+    Founding_date DATE,
+    Availability BOOLEAN,
+    Semester_period VARCHAR(100),
+    Registration_date DATE,
+   Id_city INT,
+    Id_location INT,
+    FOREIGN KEY (Id_uni) REFERENCES Uni(Id_uni),
+    FOREIGN KEY (Id_city) REFERENCES City(Id_city),
+    FOREIGN KEY (Id_location) REFERENCES Location(Id_location)
+);
+
+CREATE TABLE Country (
+    Id_country INT PRIMARY KEY AUTO_INCREMENT,
+    Country_name VARCHAR(100),
+    Visa BOOLEAN,
+    Country_safety VARCHAR(100)
+);
+
+CREATE TABLE City (
+    Id_city INT PRIMARY KEY AUTO_INCREMENT,
+    City_name VARCHAR(100),
+    Housing VARCHAR(255),
+    City_safety VARCHAR(100),
+    Id_country INT,
+    FOREIGN KEY (Id_country) REFERENCES Country(Id_country)
+);
+
+CREATE TABLE Location (
+    Id_location INT PRIMARY KEY AUTO_INCREMENT,
+    Continent VARCHAR(100),
+    Address VARCHAR(255)
 );
