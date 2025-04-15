@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getCountryflag } from '../data/getcountryflag';
 import { locations } from "../data/universities";
-import ExpandableSections from "./ExpandableSections";
+import ExpandableSections from "./ONGLETS/ExpandableSections";
 
 function UniversityCard({ university }) {
   const [expanded, setExpanded] = useState(false);

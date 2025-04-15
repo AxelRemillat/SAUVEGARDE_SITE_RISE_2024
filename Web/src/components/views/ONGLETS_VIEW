@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import ContinentTabs from './components/ContinentTabs';
-import UniversityCard from './components/universitycard';
-import { universities, locations } from './data/universities';
+import ContinentTabs from '../ONGLETS/ContinentTabs';
+import UniversityCard from '../universitycard';
+import { universities, locations } from '../../data/universities';
+
 
 function App() {
   const [selectedContinent, setSelectedContinent] = useState("Monde");
