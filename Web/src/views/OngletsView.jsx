@@ -1,24 +1,24 @@
 import { useState } from 'react';
-import ContinentTabs from '../ONGLETS/ContinentTabs';
-import UniversityCard from '../universitycard';
-import { universities, locations } from '../../data/universities';
 
+import ContinentTabs from '../components/ONGLETS/ContinentTabs';
+import UniversityCard from '../components/ONGLETS/UniversityCard';
+import { universities, locations } from '../data/universities';
 
-function App() {
+const OngletsView = () => {
   const [selectedContinent, setSelectedContinent] = useState("Monde");
 
-  const filteredUniversities = selectedContinent === "Monde"
-    ? universities
-    : universities.filter(u => u.continent === selectedContinent);
+  const filteredUniversities =
+    selectedContinent === "Monde"
+      ? universities
+      : universities.filter((u) => u.continent === selectedContinent);
 
-  // Étape 2 : fonction pour chercher les infos correspondantes
   function getLocationData(universityName) {
-    return locations.find(loc => loc.info.includes(universityName));
+    return locations.find((loc) => loc.info.includes(universityName));
   }
 
   return (
     <div>
-      {/* Onglets en sticky pleine largeur */}
+      {/* Onglets continent */}
       <div style={{ width: "100%" }}>
         <ContinentTabs
           selectedContinent={selectedContinent}
@@ -26,12 +26,12 @@ function App() {
         />
       </div>
 
-      {/* Cartes centrées */}
+      {/* Cartes des universités */}
       <div
         style={{
           paddingTop: "20px",
           paddingBottom: "100px",
-          minHeight: "100vh", // Empêche l'effondrement de la zone
+          minHeight: "100vh",
           width: "90%",
           maxWidth: "1200px",
           margin: "0 auto"
@@ -39,12 +39,12 @@ function App() {
       >
         {filteredUniversities.length > 0 ? (
           filteredUniversities.map((uni, index) => {
-            const locData = getLocationData(uni.name); // Étape 3
+            const locData = getLocationData(uni.name);
             return (
               <UniversityCard
                 key={index}
                 university={uni}
-                locationInfo={locData} // On envoie les infos supplémentaires
+                locationInfo={locData}
               />
             );
           })
@@ -56,6 +56,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
-export default App;
+export default OngletsView;
