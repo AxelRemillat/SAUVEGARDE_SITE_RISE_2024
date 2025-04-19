@@ -1,32 +1,35 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import UniversityCard from './UniversityCard';
+import ContinentTabs from './ContinentTabs';
+import ExpandableSections from './ExpandableSections';
+import { universities, locations } from '../../data/universities';
 
-import ContinentTabs from '../components/ONGLETS.jsx/ContinentTabs';
-import UniversityCard from '../components/ONGLETS.jsx/UniversityCard';
-import { universities, locations } from '../data/universities';
-
-const OngletsView = () => {
+const Onglets = () => {
   const [selectedContinent, setSelectedContinent] = useState("Monde");
+  const [openSection, setOpenSection] = useState(null);
 
   const filteredUniversities =
     selectedContinent === "Monde"
       ? universities
       : universities.filter((u) => u.continent === selectedContinent);
 
-  function getLocationData(universityName) {
+  const getLocationData = (universityName) => {
     return locations.find((loc) => loc.info.includes(universityName));
-  }
+  };
+
+  const toggleSection = (section) => {
+    setOpenSection(openSection === section ? null : section);
+  };
 
   return (
     <div>
-      {/* Onglets continent */}
-      <div style={{ width: "100%" }}>
-        <ContinentTabs
-          selectedContinent={selectedContinent}
-          onSelectContinent={setSelectedContinent}
-        />
-      </div>
+      {/* Onglets des continents */}
+      <ContinentTabs
+        selectedContinent={selectedContinent}
+        onSelectContinent={setSelectedContinent}
+      />
 
-      {/* Cartes des universités */}
+      {/* Liste des universités filtrées */}
       <div
         style={{
           paddingTop: "20px",
@@ -54,8 +57,14 @@ const OngletsView = () => {
           </p>
         )}
       </div>
+
+      {/* Sections déroulantes en dessous */}
+      <ExpandableSections
+        openSection={openSection}
+        toggleSection={toggleSection}
+      />
     </div>
   );
 };
 
-export default OngletsView;
+export default Onglets;

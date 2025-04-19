@@ -1,17 +1,17 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
-// import Footer from './Footer'; // si tu veux l'ajouter plus tard
+import Footer from './Footer'; // ✅ import ajouté
 
 const Layout = () => {
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
-      <main>
+      <main style={{ flex: 1 }}>
         <Outlet />
       </main>
-      {/* <Footer /> */}
-    </>
+      <Footer />
+    </div>
   );
 };
 

@@ -1,0 +1,78 @@
+.info-section {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 100px; /* ↔️ Plus d’espace entre les cartes */
+    padding: 60px 30px;
+    background-color: #ECECEC;
+  }
+  
+  .info-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 400px;       /* 📏 Cartes élargies */
+    min-height: 500px;  /* ✅ Même hauteur */
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  
+  .info-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .info-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .info-card h3 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #c42727;
+    margin-top: 15px;
+  }
+  
+  .info-card p {
+    font-size: 25px;
+    color: #333;
+    margin: 10px 0;
+    font-weight: 500;
+    flex-grow: 1;
+  }
+  
+  .info-card button {
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+  }
+  
+  .info-card button:hover {
+    background-color: #5a0dad;
+  }
+  
+  @media (max-width: 992px) {
+    .info-section {
+      justify-content: center;
+    }
+  
+    .info-card {
+      width: 90%;
+      max-width: 400px;
+    }
+  }
+  
