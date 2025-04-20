@@ -1,13 +1,19 @@
 import React from 'react';
-import Banner from "../components/StylePages/Banner"; // Assure-toi que le chemin est correct
+import Banner from "../components/StylePages/Banner";
+import Temoignages from '../components/Temoignages/temoignagestempo'; // Le composant carrousel
+import TitreHistoires from '../pages/Temoignages/ElementsStyle/TitreHistoires';
+import TexteTemoignages from '../pages/Temoignages/ElementsStyle/BloqueTexte';
 
-const Temoignages = () => {
+
+const PageTemoignages = () => {
   return (
     <div>
       <Banner text="Découvrez leurs aventures" />
-        {/* Le contenu de la page ici */}
+      <TitreHistoires />
+      <TexteTemoignages />
+      <Temoignages />
     </div>
   );
 };
 
-export default Temoignages;
+export default PageTemoignages;
