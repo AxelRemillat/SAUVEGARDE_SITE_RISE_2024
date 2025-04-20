@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 // Importation des images
-import img1 from '../../assets/ImagesAccueil_backup/EXPLORE.jpg';
-import img2 from '../../assets/ImagesAccueil_backup/BERLIN.avif';
-import img3 from '../../assets/ImagesAccueil_backup/REACH.jpg';
-import img4 from '../../assets/ImagesAccueil_backup/INSPIRE.jpg';
-import img5 from '../../assets/ImagesAccueil_backup/STUDY.avif';
+import img1 from '../../../assets/ImagesAccueil_backup/EXPLORE.jpg';
+import img2 from '../../../assets/ImagesAccueil_backup/BERLIN.avif';
+import img3 from '../../../assets/ImagesAccueil_backup/REACH.jpg';
+import img4 from '../../../assets/ImagesAccueil_backup/INSPIRE.jpg';
+import img5 from '../../../assets/ImagesAccueil_backup/STUDY.avif';
 
 // Tableau des slides avec texte
 const images = [

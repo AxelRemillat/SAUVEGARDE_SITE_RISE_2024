@@ -1,3 +1,7 @@
+// ici on va gerer tout les chemins de la navbar
+
+
+// src/components/Layout/Navbar.jsx
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.css';
@@ -9,13 +13,56 @@ const Navbar = () => {
         <span className="rise-text">RISE</span>
         <span className="rise-subtext">REACH, INSPIRE, STUDY, EXPLORE</span>
       </div>
+
       <ul className="nav-links">
-        <li><NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>ACCUEIL</NavLink></li>
-        <li><NavLink to="/temoignages">TEMOIGNAGES</NavLink></li>
-        <li><NavLink to="/appli-mobile">APPLICATION MOBILE</NavLink></li>
-        <li><NavLink to="/carte-interactive">CARTE INTERACTIVE</NavLink></li>
-        <li><NavLink to="/qui-sommes-nous">QUI SOMMES NOUS ?</NavLink></li>
-        <li><NavLink to="/nous-contacter">NOUS CONTACTER</NavLink></li>
+        <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            ACCUEIL
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/temoignages"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            TEMOIGNAGES
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/appli-mobile"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            APPLICATION MOBILE
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/carte-interactive"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            CARTE INTERACTIVE
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/qui-sommes-nous"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            QUI SOMMES NOUS ?
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/nous-contacter"
+            className={({ isActive }) => (isActive ? 'active' : '')}
+          >
+            NOUS CONTACTER
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

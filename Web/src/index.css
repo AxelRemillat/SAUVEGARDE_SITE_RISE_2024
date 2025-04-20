@@ -28,6 +28,11 @@ body {
   min-height: 100vh;
   /* Supprimé : display: flex; place-items: center; */
 }
+body {
+  user-select: none;    /* y avait un problmème ou le texte avait un cuersor de sélection je l'est donc enlevé */
+  cursor: default;
+}
+
 
 #root {
   width: 100%;
