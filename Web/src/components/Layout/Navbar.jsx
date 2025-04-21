@@ -1,6 +1,3 @@
-// ici on va gerer tout les chemins de la navbar
-
-
 // src/components/Layout/Navbar.jsx
 import React from 'react';
 import { NavLink } from 'react-router-dom';
@@ -17,7 +14,8 @@ const Navbar = () => {
       <ul className="nav-links">
         <li>
           <NavLink
-            to="/"
+            to="/app"
+            end // ✅ active seulement sur /app
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             ACCUEIL
@@ -25,7 +23,7 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/temoignages"
+            to="/app/temoignages"
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             TEMOIGNAGES
@@ -33,7 +31,7 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/appli-mobile"
+            to="/app/appli-mobile"
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             APPLICATION MOBILE
@@ -41,7 +39,7 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/carte-interactive"
+            to="/app/carte-interactive"
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             CARTE INTERACTIVE
@@ -49,7 +47,7 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/qui-sommes-nous"
+            to="/app/qui-sommes-nous"
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             QUI SOMMES NOUS ?
@@ -57,7 +55,7 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink
-            to="/nous-contacter"
+            to="/app/nous-contacter"
             className={({ isActive }) => (isActive ? 'active' : '')}
           >
             NOUS CONTACTER

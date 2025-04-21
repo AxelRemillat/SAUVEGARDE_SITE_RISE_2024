@@ -1,27 +1,29 @@
 // src/App.jsx
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Accueil from './views/Accueil';
 import QuiSommesNous from './views/QuiSommesNous';
 import AppliMobile from './views/AppliMobile';
-import Temoignages from './views/Temoignages'
+import Temoignages from './views/Temoignages';
 import NousContacter from './views/NousContacter';
-import CarteInteractive from './views/CarteInteractive'
-
+import CarteInteractive from './views/CarteInteractive';
+import Intro from './views/Intro'; // 👈 ajoute cette ligne
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        {/* ✅ Intro s'affiche en page d'accueil */}
+        <Route path="/" element={<Intro />} />
+
+        {/* ✅ Tout le reste est dans /app */}
+        <Route path="/app" element={<Layout />}>
           <Route index element={<Accueil />} />
           <Route path="qui-sommes-nous" element={<QuiSommesNous />} />
-          <Route path="appli-mobile" element={<AppliMobile />} /> {/* ✅ ajout de la route */}
-          <Route path="temoignages" element={<Temoignages />} /> {/* ✅ ajout de la route */}
-          <Route path="nous-contacter" element={<NousContacter />} /> {/* ✅ ajout de la route */}
-          <Route path="carte-interactive" element={<CarteInteractive />} /> {/* ✅ ajout de la route */}
-          {/* Ajoute d'autres routes ici si nécessaire */}
+          <Route path="appli-mobile" element={<AppliMobile />} />
+          <Route path="temoignages" element={<Temoignages />} />
+          <Route path="nous-contacter" element={<NousContacter />} />
+          <Route path="carte-interactive" element={<CarteInteractive />} />
         </Route>
       </Routes>
     </BrowserRouter>
@@ -29,3 +31,4 @@ function App() {
 }
 
 export default App;
+
