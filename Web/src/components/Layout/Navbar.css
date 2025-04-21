@@ -1,19 +1,19 @@
 body {
   margin: 0;
-  padding: 0; /* on supprime le padding-top qui compensait la navbar fixe */
+  padding: 0;
   font-family: Arial, sans-serif;
   background: linear-gradient(to right, #ECECEC, #ECECEC);
 }
 
 /* ---- NAVBAR ---- */
 .navbar {
-  position: relative;            /* elle suit le flux normal */
-  z-index: 1000;                 /* reste au-dessus du contenu si besoin */
+  position: relative;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: #fefbf2;
-  padding: 2px;
+  padding: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   box-sizing: border-box;
@@ -23,13 +23,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-start; /* pour aligner à gauche */
 }
 
-.rise-text {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 86px;
-  color: #ee0d0d;
+.rise-logo {
+  height: 60px; /* adapte à la taille de ton logo */
+  margin-bottom: 8px;
+  margin-left:-10px; /* espace entre le logo et le sous-texte */
 }
 
 .rise-subtext {
