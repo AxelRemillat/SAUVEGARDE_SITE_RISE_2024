@@ -1,3 +1,6 @@
+// c'est le bouton decouvre rise
+
+
 import React from 'react';
 
 const DiscoverButton = ({ onClick }) => (

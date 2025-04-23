@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Footer.css';
+import logo from '../../assets/ImagesAccueil_backup/logo.png';
 
 const Footer = () => {
   const [modalType, setModalType] = useState(null);
@@ -24,8 +25,9 @@ const Footer = () => {
     <>
       <footer>
         <div className="footer-container">
+          <img src={logo} alt="Logo" className="footer-logo" />
+
           <div className="logo-section">
-            <img src="/logo192.png" alt="Logo" />
             <span>Riseconnect.fr</span>
           </div>
 

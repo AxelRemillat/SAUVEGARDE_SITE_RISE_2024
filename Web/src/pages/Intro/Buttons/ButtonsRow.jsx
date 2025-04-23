@@ -1,3 +1,7 @@
+// les deux autres boutons quil faudra programmer avec le backend
+
+
+
 import React from 'react';
 
 const ButtonsRow = ({ onClick }) => (
@@ -29,3 +33,5 @@ const styles = {
 };
 
 export default ButtonsRow;
+
+
