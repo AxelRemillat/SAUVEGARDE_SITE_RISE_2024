@@ -18,7 +18,7 @@ function AdvancedFilters({ onFiltersChange }) {
   };
 
   const handleGradeChange = (e) => {
-    const value = parseFloat(e.target.value);
+    const value = parseFloat(e.target.value); 
     setGradeMax(value);
     onFiltersChange({ noCost, ieltsMax, gradeMax: value });
   };

@@ -78,14 +78,14 @@ const CarteUniHeader = () => {
                 alt="Icône"
                 style={{ maxWidth: 60, marginBottom: 10 }}
               />
-              <h2 style={{ margin: 0, fontSize: 22 }}>Comment marche la carte ?</h2>
+              <h2 style={{ margin: 0, fontSize: 22 }}>Carte Universitaire</h2>
             </div>
             <span style={styles.closeBtn} onClick={() => setModalOpen(false)}>×</span>
             <div style={styles.modalContent}>
-              <p>- Présentez-la à l'entrée de l'université pour accéder aux locaux.</p>
-              <p>- Utilisez-la pour emprunter des livres à la bibliothèque.</p>
-              <p>- Consultez vos crédits et avantages sur le portail étudiant.</p>
-              <p>- En cas de perte, contactez le service des étudiants.</p>
+              <p>- 3 filtres</p>
+              <p>- Niveau Ielts</p>
+              <p>- xxxxxxxxxxxxxxx</p>
+
             </div>
           </div>
         </div>
