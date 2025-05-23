@@ -21,7 +21,7 @@ const AventureTitre = () => {
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.text}>Prépare ton aventure à l'international</h2>
+      <h2 style={styles.text}>Prépare ton aventure à l'internationalHHJHJHJHJH</h2>
     </div>
   );
 };
