@@ -1,0 +1,45 @@
+export function getCountryflag(country) {
+    const countryMap = {
+      "Afrique du Sud": "za",
+      "Allemagne": "de",
+      "Australie": "au",
+      "Brésil": "br",
+      "Canada": "ca",
+      "Chine": "cn",
+      "Chypre": "cy",
+      "Colombie": "co",
+      "Corée du Sud": "kr",
+      "Costa Rica": "cr",
+      "Croatie": "hr",
+      "Espagne": "es",
+      "États-Unis": "us",
+      "Écosse": "gb-sct", // ou "gb" si tu veux simplifier
+      "Émirats arabes unis": "ae",
+      "Finlande": "fi",
+      "Hongrie": "hu",
+      "Inde": "in",
+      "Indonésie": "id",
+      "Irlande": "ie",
+      "Israël": "il",
+      "Italie": "it",
+      "Japon": "jp",
+      "Lettonie": "lv",
+      "Lituanie": "lt",
+      "Malaisie": "my",
+      "Mexique": "mx",
+      "Nouvelle-Zélande": "nz",
+      "Pays-Bas": "nl",
+      "Pérou": "pe",
+      "Pologne": "pl",
+      "Portugal": "pt",
+      "République Tchèque": "cz",
+      "Royaume-Uni": "gb",
+      "Taïwan": "tw",
+      "Thaïlande": "th",
+      "Turquie": "tr",
+      "Vietnam": "vn" 
+    };
+  
+    return countryMap[country] || "un"; // "un" = unknown
+  }
+  
