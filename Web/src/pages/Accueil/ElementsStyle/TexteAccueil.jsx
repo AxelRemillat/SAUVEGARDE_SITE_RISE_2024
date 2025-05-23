@@ -15,7 +15,7 @@ const TexteAccueil = () => {
       <div style={styles.block}>
         <h3 style={styles.title}>Ce que tu peux trouver sur notre site :</h3>
         <p style={styles.paragraph}>
-          Une carte universitaire regroupant toutes les informations essentielles sur chaque université.
+          Mathis va baiser OliviaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaUne carte universitaire regroupant toutes les informations essentielles sur chaque université.
           Des témoignages authentiques d’étudiants ayant déjà vécu l’expérience dans ta destination.
           Une carte interactive qui te permet de partager ton avis sur tous les lieux que tu as visités.
         </p>
