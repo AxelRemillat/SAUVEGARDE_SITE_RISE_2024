@@ -8,6 +8,9 @@ import Legend from "./Legend";
 import AdvancedFilters from "./AdvancedFilters"; // 🆕 J'ajoute AdvancedFilters
 import { useCarteUniLogic } from "./useCarteUniLogic";
 
+console.log("CLÉ API CHARGÉE : ", import.meta.env.VITE_GOOGLE_MAPS_API_KEY);
+
+
 const containerStyle = {
   width: "100%",
   height: "90vh",
