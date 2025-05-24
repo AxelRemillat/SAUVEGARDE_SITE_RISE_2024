@@ -6,8 +6,8 @@ function IntroScreen({ onStart }) {
   const handleClick = () => {
     setHide(true);
     setTimeout(() => {
-      onStart(); // déclenche la suite après l'animation
-    }, 1500); // même durée que l'animation CSS
+      onStart();
+    }, 1500);
   };
 
   return (
@@ -21,22 +21,34 @@ function IntroScreen({ onStart }) {
         height: "100%",
         backgroundColor: "rgba(255, 255, 255, 0.5)",
         backdropFilter: "blur(10px)",
-        zIndex: 999,
+        zIndex: 10,
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column",
         fontSize: "22px",
         color: "#c42727",
         fontWeight: "bold",
-        transition: "transform 1.5s ease, opacity 1.5s ease",
+        borderRadius: "15px",
+        overflow: "hidden",
+        transition: "opacity 1.5s ease",
+        textAlign: "center",
       }}
     >
-      <h1>Bienvenue sur ta carte universitaire !</h1>
+      <h1
+        style={{
+          fontSize: "48px",
+          margin: 0,
+          whiteSpace: "nowrap", // ⬅️ empêche le retour à la ligne
+        }}
+      >
+        Bienvenue sur ta carte universitaire !
+      </h1>
+
       <button
         onClick={handleClick}
         style={{
-          marginTop: "20px",
+          marginTop: "40px",
           backgroundColor: "#613D9D",
           color: "white",
           padding: "20px 40px",
@@ -46,8 +58,8 @@ function IntroScreen({ onStart }) {
           cursor: "pointer",
           transition: "transform 0.2s ease",
         }}
-        onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
-        onMouseOut={(e) => e.target.style.transform = "scale(1)"}
+        onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
+        onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
       >
         Commencer l'aventure
       </button>

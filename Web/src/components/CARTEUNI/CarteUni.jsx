@@ -5,11 +5,10 @@ import FilterControls from "./FilterControls";
 import ZoomControls from "./ZoomControls";
 import FullscreenButton from "./FullscreenButton";
 import Legend from "./Legend";
-import AdvancedFilters from "./AdvancedFilters"; // 🆕 J'ajoute AdvancedFilters
+import AdvancedFilters from "./AdvancedFilters";
 import { useCarteUniLogic } from "./useCarteUniLogic";
 
 console.log("CLÉ API CHARGÉE : ", import.meta.env.VITE_GOOGLE_MAPS_API_KEY);
-
 
 const containerStyle = {
   width: "100%",
@@ -50,14 +49,16 @@ function CarteUni() {
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
   });
 
-  // 🆕 Nouveau pour filtres avancés
-  const [advancedFilters, setAdvancedFilters] = useState({ noCost: false, ieltsMax: 9, gradeMax: 20 });
+  const [advancedFilters, setAdvancedFilters] = useState({
+    noCost: false,
+    ieltsMax: 9,
+    gradeMax: 20,
+  });
 
   const handleAdvancedFiltersChange = (filters) => {
     setAdvancedFilters(filters);
   };
 
-  // 🆕 Appliquer filtres avancés sur markers
   const getFilteredLocations = () => {
     return filteredMarkers.filter((loc) => {
       if (advancedFilters.noCost && loc.cost === "oui") return false;
@@ -81,6 +82,9 @@ function CarteUni() {
     >
       {isLoaded && (
         <div id="map-container" style={containerStyle}>
+          {/* ✅ IntroScreen maintenant dans la carte */}
+          {showIntro && <IntroScreen onStart={startAdventure} />}
+
           <GoogleMap
             mapContainerStyle={{ height: "100%", width: "100%" }}
             center={center}
@@ -114,13 +118,11 @@ function CarteUni() {
               <ZoomControls onZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
               <FullscreenButton onToggle={handleFullscreenToggle} />
               {activeLegend && <Legend type={activeLegend} />}
-              <AdvancedFilters onFiltersChange={handleAdvancedFiltersChange} /> {/* 🆕 AdvancedFilters ajouté */}
+              <AdvancedFilters onFiltersChange={handleAdvancedFiltersChange} />
             </>
           )}
         </div>
       )}
-
-      {showIntro && <IntroScreen onStart={startAdventure} />}
     </div>
   );
 }
