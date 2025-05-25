@@ -6,7 +6,7 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
   const [showRight, setShowRight] = useState(true);
   const scrollRef = useRef(null);
 
-  const SCROLL_AMOUNT = 150;
+  const SCROLL_AMOUNT = 160;
 
   useEffect(() => {
     updateArrows();
@@ -16,7 +16,7 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
     const container = scrollRef.current;
     if (!container) return;
     setShowLeft(container.scrollLeft > 0);
-    setShowRight(container.scrollLeft + container.clientWidth < container.scrollWidth);
+    setShowRight(container.scrollLeft + container.clientWidth < container.scrollWidth - 5);
   };
 
   const scroll = (direction) => {
@@ -28,10 +28,12 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
   };
 
   const containerStyle = {
-    marginTop: "30px",
-    padding: "0 5%",
-    maxWidth: "1200px",
-    margin: "auto",
+    marginTop: "50px",
+    marginBottom: "15px",
+    marginLeft: "-25px",
+    paddingRight: "10px",
+    maxWidth: "100%",
+    width: "100%",
   };
 
   const titleStyle = {
@@ -43,8 +45,7 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
   const scrollAreaStyle = {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    gap: "16px",
+    gap: "12px",
   };
 
   const arrowStyle = {
@@ -59,25 +60,27 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
     cursor: "pointer",
     flexShrink: 0,
     fontSize: "20px",
+    zIndex: 10,
   };
 
   const flagsWrapperStyle = {
     overflow: "hidden",
-    flex: 1,
+    width: `${66 * 17 + 10 * 16}px`, // 17 drapeaux + 16 espaces
+    maxWidth: "100%",
   };
 
   const scrollContainerStyle = {
     display: "flex",
-    gap: "12px",
+    gap: "10px",
     overflowX: "auto",
     scrollBehavior: "smooth",
     flexWrap: "nowrap",
-    padding: "8px 0",
+    padding: "6px 0",
   };
 
   const flagBaseStyle = {
-    width: "70px",
-    height: "45px",
+    width: "66px",
+    height: "42px",
     borderRadius: "7px",
     cursor: "pointer",
     boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
