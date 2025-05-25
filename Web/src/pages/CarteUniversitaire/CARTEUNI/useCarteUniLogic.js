@@ -6,7 +6,7 @@ import {
   getMarkerColorByEnglish,
   getMarkerColorByGrade,
 } from "./mapUtils";
-import { locations } from "../../data/universities";
+import { locations } from "../../../data/universities";
 
 export function useCarteUniLogic() {
   const [showIntro, setShowIntro] = useState(true);

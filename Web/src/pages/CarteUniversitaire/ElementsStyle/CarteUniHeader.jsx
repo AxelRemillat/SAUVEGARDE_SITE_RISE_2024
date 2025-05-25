@@ -104,7 +104,7 @@ const styles = {
     padding: '20px',
     borderRadius: '20px',
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
-    maxWidth: '1400px',
+    maxWidth: '1600px',
     margin: '60px auto 0',
     width: '100%',
   },

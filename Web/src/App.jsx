@@ -1,4 +1,3 @@
-// src/App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Accueil from './views/Accueil';
@@ -7,16 +6,17 @@ import AppliMobile from './views/AppliMobile';
 import Temoignages from './views/Temoignages';
 import NousContacter from './views/NousContacter';
 import CarteInteractive from './views/CarteInteractive';
-import Intro from './views/Intro'; // 👈 ajoute cette ligne
+import CarteUniversitaire from './views/CarteUniversitaire'; // ✅ ajouté ici
+import Intro from './views/Intro';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* ✅ Intro s'affiche en page d'accueil */}
+        {/* ✅ Page d'intro à la racine */}
         <Route path="/" element={<Intro />} />
 
-        {/* ✅ Tout le reste est dans /app */}
+        {/* ✅ Toutes les vraies pages sous /app */}
         <Route path="/app" element={<Layout />}>
           <Route index element={<Accueil />} />
           <Route path="qui-sommes-nous" element={<QuiSommesNous />} />
@@ -24,6 +24,7 @@ function App() {
           <Route path="temoignages" element={<Temoignages />} />
           <Route path="nous-contacter" element={<NousContacter />} />
           <Route path="carte-interactive" element={<CarteInteractive />} />
+          <Route path="carte-universitaire" element={<CarteUniversitaire />} /> {/* ✅ ajout ici */}
         </Route>
       </Routes>
     </BrowserRouter>
@@ -31,4 +32,3 @@ function App() {
 }
 
 export default App;
-

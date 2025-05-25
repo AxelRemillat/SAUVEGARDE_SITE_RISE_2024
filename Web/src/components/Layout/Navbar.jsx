@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.css';
-import logo from '../../assets/ImagesAccueil_backup/logo.png'; // ✅ ajuste le chemin si besoin
+import logo from '../../assets/ImagesAccueil_backup/logo.png'; // ajuste si besoin
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="rise-container">
-        <img src={logo} alt="Logo RISE" className="rise-logo" /> {/* 🔁 nouveau logo */}
+        <img src={logo} alt="Logo RISE" className="rise-logo" />
         <span className="rise-subtext">REACH, INSPIRE, STUDY, EXPLORE</span>
       </div>
 
@@ -18,18 +18,24 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/app/carte-universitaire" className={({ isActive }) => (isActive ? 'active' : '')}>
+            CARTE UNIVERSITAIRE
+          </NavLink>
+          
+        </li>
+        <li>
           <NavLink to="/app/temoignages" className={({ isActive }) => (isActive ? 'active' : '')}>
             TEMOIGNAGES
           </NavLink>
         </li>
         <li>
-          <NavLink to="/app/appli-mobile" className={({ isActive }) => (isActive ? 'active' : '')}>
-            APPLICATION MOBILE
+          <NavLink to="/app/carte-interactive" className={({ isActive }) => (isActive ? 'active' : '')}>
+            CARTE INTERACTIVE
           </NavLink>
         </li>
         <li>
-          <NavLink to="/app/carte-interactive" className={({ isActive }) => (isActive ? 'active' : '')}>
-            CARTE INTERACTIVE
+          <NavLink to="/app/appli-mobile" className={({ isActive }) => (isActive ? 'active' : '')}>
+            APPLICATION MOBILE
           </NavLink>
         </li>
         <li>
