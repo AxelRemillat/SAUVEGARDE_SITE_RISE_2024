@@ -2,30 +2,19 @@ import React, { useState, useRef, useEffect } from "react";
 import ContinentTabs from "./ContinentTabs";
 import UniversityCard from "./UniversityCard";
 import OngletsDispos from "./OngletsDispos";
-// import Filtres from "./Filtres"; // 🚫 Filtres désactivés
-import { universities, locations } from "../../../data/universities";
+import FiltresOnglets from "./FiltresOnglets";
+import { locations } from "../../../data/universities";
 
 const Onglets = () => {
   const [selectedContinent, setSelectedContinent] = useState("Monde");
+  const [filteredData, setFilteredData] = useState([]);
   const [showAll, setShowAll] = useState(false);
-
-  const filteredUniversities = universities.filter(
-    (u) => selectedContinent === "Monde" || u.continent === selectedContinent
-  );
-
-  const displayedUniversities = showAll
-    ? filteredUniversities
-    : filteredUniversities.slice(0, 3);
-
   const countryRefs = useRef({});
+  const pendingScrollCountry = useRef(null); // ✅ nouveau
 
-  useEffect(() => {
-    countryRefs.current = {};
-  }, [selectedContinent]);
-
-  const getLocationData = (universityName) => {
-    return locations.find((loc) => loc.info.includes(universityName));
-  };
+  const countriesInContinent = Array.from(
+    new Set(filteredData.map((u) => u.country))
+  );
 
   const scrollToCountry = (country) => {
     const scrollWithOffset = (el) => {
@@ -35,67 +24,65 @@ const Onglets = () => {
     };
 
     const el = countryRefs.current[country];
-
     if (el) {
       scrollWithOffset(el);
     } else {
+      pendingScrollCountry.current = country;
       setShowAll(true);
-
-      setTimeout(() => {
-        const elAfterExpand = countryRefs.current[country];
-        if (elAfterExpand) {
-          scrollWithOffset(elAfterExpand);
-        }
-      }, 100);
     }
   };
 
-  const countriesInContinent = Array.from(
-    new Set(filteredUniversities.map((u) => u.country))
-  );
+  // ✅ effet pour scroller après rendu des cartes
+  useEffect(() => {
+    if (pendingScrollCountry.current && showAll) {
+      const el = countryRefs.current[pendingScrollCountry.current];
+      if (el) {
+        const yOffset = -300;
+        const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+        pendingScrollCountry.current = null;
+      }
+    }
+  }, [filteredData, showAll]);
+
+  const displayedUniversities = showAll
+    ? filteredData
+    : filteredData.slice(0, 3);
 
   return (
-    <div style={{ display: "flex", gap: "20px" }}>
-      {/* 🎯 Filtres désactivés
-      <Filtres
-        noCost={noCost}
-        setNoCost={setNoCost}
-        ieltsMax={ieltsMax}
-        setIeltsMax={setIeltsMax}
-        gradeMax={gradeMax}
-        setGradeMax={setGradeMax}
+    <>
+      <ContinentTabs
+        selectedContinent={selectedContinent}
+        onSelectContinent={(continent) => {
+          setSelectedContinent(continent);
+          setShowAll(false);
+        }}
       />
-      */}
 
-      {/* 🎯 Partie Onglets + Universités */}
-      <div style={{ flex: 1 }}>
-        <ContinentTabs
+      <div style={{ display: "flex", gap: "20px" }}>
+        <FiltresOnglets
+          data={locations}
           selectedContinent={selectedContinent}
-          onSelectContinent={(continent) => {
-            setSelectedContinent(continent);
-            setShowAll(false);
-          }}
+          onFilter={(result) => setFilteredData(result)}
         />
 
-        <OngletsDispos
-          continent={selectedContinent}
-          countries={countriesInContinent}
-          onFlagClick={scrollToCountry}
-        />
+        <div style={{ flex: 1 }}>
+          <OngletsDispos
+            continent={selectedContinent}
+            countries={countriesInContinent}
+            onFlagClick={scrollToCountry}
+          />
 
-        <div
-          style={{
-            paddingTop: "30px",
-            paddingBottom: "100px",
-            width: "90%",
-            maxWidth: "1200px",
-            margin: "0 auto",
-          }}
-        >
-          {displayedUniversities.length > 0 ? (
-            displayedUniversities.map((uni, index) => {
-              const locData = getLocationData(uni.name);
-
+          <div
+            style={{
+              marginTop: "80px",
+              maxWidth: "1400px",
+              marginLeft: "-30px",
+              marginRight: "0px",
+              paddingRight: "10px",
+            }}
+          >
+            {displayedUniversities.map((uni, index) => {
               let ref = null;
               if (!countryRefs.current[uni.country]) {
                 ref = (el) => {
@@ -105,38 +92,35 @@ const Onglets = () => {
 
               return (
                 <div key={index} ref={ref}>
-                  <UniversityCard university={uni} locationInfo={locData} />
+                  <UniversityCard university={uni} />
                 </div>
               );
-            })
-          ) : (
-            <p style={{ padding: "20px", fontStyle: "italic", color: "#999" }}>
-              Aucune université trouvée pour ce continent.
-            </p>
-          )}
+            })}
 
-          {filteredUniversities.length > 3 && (
-            <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
-              <button
-                onClick={() => setShowAll(!showAll)}
-                style={{
-                  padding: "12px 24px",
-                  backgroundColor: "#613D9D",
-                  color: "#fff",
-                  fontWeight: "bold",
-                  border: "none",
-                  borderRadius: "8px",
-                  cursor: "pointer",
-                  fontSize: "16px",
-                }}
-              >
-                {showAll ? "Voir moins d’universités" : "Voir plus d’universités"}
-              </button>
-            </div>
-          )}
+            {filteredData.length > 3 && (
+              <div style={{ textAlign: "center", marginTop: "30px" }}>
+                <button
+                  onClick={() => setShowAll(!showAll)}
+                  style={{
+                    padding: "12px 34px",
+                    marginBottom: "40px",
+                    backgroundColor: "#613D9D",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    border: "none",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    fontSize: "16px",
+                  }}
+                >
+                  {showAll ? "Afficher moins" : "Voir plus d’universités"}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -6,7 +6,7 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
   const [showRight, setShowRight] = useState(true);
   const scrollRef = useRef(null);
 
-  const SCROLL_AMOUNT = 150;
+  const SCROLL_AMOUNT = 160;
 
   useEffect(() => {
     updateArrows();
@@ -16,7 +16,7 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
     const container = scrollRef.current;
     if (!container) return;
     setShowLeft(container.scrollLeft > 0);
-    setShowRight(container.scrollLeft + container.clientWidth < container.scrollWidth);
+    setShowRight(container.scrollLeft + container.clientWidth < container.scrollWidth - 5);
   };
 
   const scroll = (direction) => {
@@ -28,60 +28,29 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
   };
 
   const containerStyle = {
-    marginTop: "30px",
-    padding: "0 5%",
-    maxWidth: "1200px",
-    margin: "auto",
-    position: "relative",
-  };
-
-  const lineStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "16px",
+    marginTop: "50px",
+    marginBottom: "15px",
+    marginLeft: "-25px",
+    paddingRight: "10px",
+    maxWidth: "100%",
+    width: "100%",
   };
 
   const titleStyle = {
     fontSize: "27px",
     color: "#333",
-    whiteSpace: "nowrap",
-    flexShrink: 0,
+    marginBottom: "12px",
   };
 
-  const flagsWrapperStyle = {
-    position: "relative",
+  const scrollAreaStyle = {
     display: "flex",
     alignItems: "center",
-    overflow: "hidden",
-    flex: 1,
-  };
-
-  const scrollContainerStyle = {
-    display: "flex",
     gap: "12px",
-    overflowX: "auto",
-    scrollBehavior: "smooth",
-    flexWrap: "nowrap",
-    padding: "8px 0",
-  };
-
-  const flagBaseStyle = {
-    width: "70px",
-    height: "45px",
-    borderRadius: "7px",
-    cursor: "pointer",
-    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    flexShrink: 0,
-    opacity: 0,
   };
 
   const arrowStyle = {
-    position: "absolute",
-    top: "50%",
-    transform: "translateY(-50%)",
-    width: "32px",
-    height: "32px",
+    width: "36px",
+    height: "36px",
     backgroundColor: "#eee",
     borderRadius: "50%",
     boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
@@ -89,7 +58,35 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
     alignItems: "center",
     justifyContent: "center",
     cursor: "pointer",
+    flexShrink: 0,
+    fontSize: "20px",
     zIndex: 10,
+  };
+
+  const flagsWrapperStyle = {
+    overflow: "hidden",
+    width: `${66 * 17 + 10 * 16}px`, // 17 drapeaux + 16 espaces
+    maxWidth: "100%",
+  };
+
+  const scrollContainerStyle = {
+    display: "flex",
+    gap: "10px",
+    overflowX: "auto",
+    scrollBehavior: "smooth",
+    flexWrap: "nowrap",
+    padding: "6px 0",
+  };
+
+  const flagBaseStyle = {
+    width: "66px",
+    height: "42px",
+    borderRadius: "7px",
+    cursor: "pointer",
+    boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+    flexShrink: 0,
+    opacity: 0,
   };
 
   const styleTag = `
@@ -127,14 +124,14 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
     <>
       <style>{styleTag}</style>
       <div style={containerStyle}>
-        <div style={lineStyle}>
-          <h3 style={titleStyle}>Pays disponibles :</h3>
+        <h3 style={titleStyle}>Pays disponibles :</h3>
+        <div style={scrollAreaStyle}>
+          {showLeft && (
+            <div style={arrowStyle} onClick={() => scroll("left")}>
+              ◀
+            </div>
+          )}
           <div style={flagsWrapperStyle}>
-            {showLeft && (
-              <div style={{ ...arrowStyle, left: 0 }} onClick={() => scroll("left")}>
-                ◀
-              </div>
-            )}
             <div
               style={scrollContainerStyle}
               ref={scrollRef}
@@ -157,12 +154,12 @@ const OngletsDispos = ({ continent, countries, onFlagClick }) => {
                 />
               ))}
             </div>
-            {showRight && (
-              <div style={{ ...arrowStyle, right: 0 }} onClick={() => scroll("right")}>
-                ▶
-              </div>
-            )}
           </div>
+          {showRight && (
+            <div style={arrowStyle} onClick={() => scroll("right")}>
+              ▶
+            </div>
+          )}
         </div>
       </div>
     </>
