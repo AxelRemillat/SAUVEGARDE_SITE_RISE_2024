@@ -1,14 +1,20 @@
 import React from 'react';
 
-// 🔁 Plus besoin de useNavigate ici
+// ✅ Plus besoin de useNavigate ici
 import Background from '../pages/Intro/ElementsStyle/Background';
-import MainBox from '../pages/Intro/ElementsStyle/MainBox'; // ✅ Assure-toi que ce fichier reçoit bien les props
+import MainBox from '../pages/Intro/ElementsStyle/MainBox';
+import LogoFixed from '../pages/Intro/ElementsStyle/LogoFixed';
 
 const Intro = () => {
+  const redirect = () => {
+    // si ce callback est utile à MainBox
+  };
+
   return (
     <div style={styles.body}>
       <Background />
-      <MainBox />
+      <MainBox onRedirect={redirect} />
+      <LogoFixed />
     </div>
   );
 };
