@@ -7,7 +7,7 @@ import Onglets from '../pages/CarteUniversitaire/Onglets/ONGLETS';
 const CarteUniversitaire = () => {
   return (
     <div>
-      <Banner text="Carte universitaire" />
+      <Banner text="Vos Universités partenaires" />
       <CarteUniHeader />
       <CarteUni />
       <Onglets />
