@@ -4,12 +4,11 @@ import ButtonsRow from '../Buttons/ButtonsRow';
 import DiscoverButton from '../Buttons/DiscoverButton';
 import PremiumLink from '../Buttons/PremiumLink';
 
-
 const MainBox = ({ onRedirect }) => {
   return (
     <div style={styles.container}>
       <TitleBlock />
-      <ButtonsRow onClick={onRedirect} />
+      <ButtonsRow />
       <DiscoverButton onClick={onRedirect} />
       <PremiumLink />
     </div>

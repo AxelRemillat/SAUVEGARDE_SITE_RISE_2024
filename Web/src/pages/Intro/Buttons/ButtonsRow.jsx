@@ -1,15 +1,16 @@
-// les deux autres boutons quil faudra programmer avec le backend
-
-
-
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const ButtonsRow = ({ onClick }) => (
-  <div style={styles.row}>
-    <button style={styles.btn} onClick={onClick}>Se connecter</button>
-    <button style={styles.btn} onClick={onClick}>Créer un compte</button>
-  </div>
-);
+const ButtonsRow = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div style={styles.row}>
+      <button style={styles.btn} onClick={() => navigate('/login')}>Se connecter</button>
+      <button style={styles.btn} onClick={() => navigate('/signup')}>Créer un compte</button>
+    </div>
+  );
+};
 
 const styles = {
   row: {
@@ -33,5 +34,3 @@ const styles = {
 };
 
 export default ButtonsRow;
-
-

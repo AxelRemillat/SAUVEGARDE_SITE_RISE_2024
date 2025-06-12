@@ -1,18 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
-// Imports des éléments visuels depuis ton arborescence
+// ✅ Plus besoin de useNavigate ici
 import Background from '../pages/Intro/ElementsStyle/Background';
-import MainBox from '../pages/Intro/ElementsStyle/MainBox'; // Assure-toi que le chemin est correct
+import MainBox from '../pages/Intro/ElementsStyle/MainBox';
 import LogoFixed from '../pages/Intro/ElementsStyle/LogoFixed';
 
 const Intro = () => {
-  const navigate = useNavigate();
-
   const redirect = () => {
-    // ✅ On enregistre que l'utilisateur est passé par l'intro
-    sessionStorage.setItem('introSeen', 'true');
-    navigate('/app'); // Redirection vers le layout principal
+    // si ce callback est utile à MainBox
   };
 
   return (
@@ -20,8 +15,6 @@ const Intro = () => {
       <Background />
       <MainBox onRedirect={redirect} />
       <LogoFixed />
-      {/* Le bouton de découverte est intégré dans MainBox */}
-      {/* <DiscoverButton onClick={redirect} /> */}
     </div>
   );
 };
