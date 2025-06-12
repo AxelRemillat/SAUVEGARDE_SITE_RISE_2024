@@ -8,6 +8,8 @@ import NousContacter from './views/NousContacter';
 import CarteInteractive from './views/CarteInteractive';
 import CarteUniversitaire from './views/CarteUniversitaire'; // ✅ ajouté ici
 import Intro from './views/Intro';
+import Partenaires from './views/Partenaires';
+import SalleTrophees from './views/SalleTrophees';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="nous-contacter" element={<NousContacter />} />
           <Route path="carte-interactive" element={<CarteInteractive />} />
           <Route path="carte-universitaire" element={<CarteUniversitaire />} /> {/* ✅ ajout ici */}
+          <Route path="partenaires" element={<Partenaires />} /> {/* ✅ ajout ici */}
+          <Route path="salle-trophees" element={<SalleTrophees />} /> {/* ✅ ajout ici */}
         </Route>
       </Routes>
     </BrowserRouter>
