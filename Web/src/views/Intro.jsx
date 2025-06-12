@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // Imports des éléments visuels depuis ton arborescence
 import Background from '../pages/Intro/ElementsStyle/Background';
 import MainBox from '../pages/Intro/ElementsStyle/MainBox'; // Assure-toi que le chemin est correct
+import LogoFixed from '../pages/Intro/ElementsStyle/LogoFixed';
 
 const Intro = () => {
   const navigate = useNavigate();
@@ -18,6 +19,9 @@ const Intro = () => {
     <div style={styles.body}>
       <Background />
       <MainBox onRedirect={redirect} />
+      <LogoFixed />
+      {/* Le bouton de découverte est intégré dans MainBox */}
+      {/* <DiscoverButton onClick={redirect} /> */}
     </div>
   );
 };

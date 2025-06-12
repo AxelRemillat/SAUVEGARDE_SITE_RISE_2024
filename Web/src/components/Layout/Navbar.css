@@ -23,14 +23,14 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start; /* pour aligner à gauche */
+  align-items: flex-start;
 }
 
 .rise-logo {
-  height: 150px; /* adapte à la taille de ton logo */
+  height: 150px;
   margin-bottom: -25px;
-  margin-left:-20px;
-  margin-top: -35px; /* espace entre le logo et le sous-texte */
+  margin-left: -20px;
+  margin-top: -35px;
 }
 
 .rise-subtext {
@@ -46,10 +46,11 @@ body {
   gap: 20px;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .nav-links li {
-  display: inline;
+  position: relative;
 }
 
 .nav-links li a {
@@ -72,4 +73,60 @@ body {
 
 .nav-links a:hover {
   color: #d9534f;
+}
+
+/* Dropdowns */
+.dropdown-wrapper {
+  position: relative;
+}
+
+.dropdown-label {
+  cursor: pointer;
+  font-weight: 770;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+}
+
+.dropdown-label.active {
+  background-color: #c42727;
+  color: white;
+  border-radius: 20px;
+}
+
+.dropdown-menu.vertical {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+  list-style: none;
+  padding: 0;
+}
+
+.dropdown-menu.vertical li {
+  margin: 4px 0;
+}
+
+.dropdown-menu.vertical li a {
+  color: #333;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.dropdown-menu.vertical li a:hover {
+  background-color: #f2f2f2;
+  color: #c42727;
+}
+
+/* Supprimer fond et ombre */
+.dropdown-menu.no-background {
+  background: none;
+  box-shadow: none;
 }
