@@ -12,7 +12,7 @@ const tropheeData = [
   {
     id: "prix2",
     title: "Concours Ionis 2025",
-    description: "Sélectionné parmi plus de 400 candidatures, RISE fait pSélectionné parmi plus de 400 candidatures, RISE fait partie des 20 lauréats de la première édition de l’initiative lancée par le Groupe IONIS à l’automne 2024. Ce programme soutient les projets étudiants porteurs de sens à travers une bourse de 3 000 €, destinée à concrétiser des ambitions personnelles ou professionnelles. Humanitaire, social, technologique ou entrepreneurial : RISE s’inscrit dans cette nouvelle génération d’initiatives engagées et inspirantes.artie des 20 lauréats...",
+    description: "Sélectionné parmi plus de 400 candidatures, RISE fait partie des 20 lauréats de la première édition de l’initiative lancée par le Groupe IONIS à l’automne 2024. Ce programme soutient les projets étudiants porteurs de sens à travers une bourse de 3 000 €, destinée à concrétiser des ambitions personnelles ou professionnelles. Humanitaire, social, technologique ou entrepreneurial : RISE s’inscrit dans cette nouvelle génération d’initiatives engagées et inspirantes.artie des 20 lauréats...",
     img: CC2
   },
   {
