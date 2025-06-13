@@ -30,53 +30,53 @@ const Navbar = () => {
 
       <ul className="nav-links">
         <li>
-          <NavLink to="/app" end className={({ isActive }) => (isActive ? 'active' : '')}>
+          <NavLink to="/app" end className={({ isActive }) => `nav-text ${isActive ? 'active' : ''}`}>
             ACCUEIL
           </NavLink>
         </li>
         <li>
-          <NavLink to="/app/carte-universitaire" className={({ isActive }) => (isActive ? 'active' : '')}>
+          <NavLink to="/app/carte-universitaire" className={({ isActive }) => `nav-text ${isActive ? 'active' : ''}`}>
             CARTE UNIVERSITAIRE
           </NavLink>
         </li>
         <li>
-          <NavLink to="/app/temoignages" className={({ isActive }) => (isActive ? 'active' : '')}>
+          <NavLink to="/app/temoignages" className={({ isActive }) => `nav-text ${isActive ? 'active' : ''}`}>
             TÉMOIGNAGES
           </NavLink>
         </li>
         <li>
-          <NavLink to="/app/carte-interactive" className={({ isActive }) => (isActive ? 'active' : '')}>
+          <NavLink to="/app/carte-interactive" className={({ isActive }) => `nav-text ${isActive ? 'active' : ''}`}>
             CARTE INTERACTIVE
           </NavLink>
         </li>
 
         <li className="dropdown-wrapper" ref={riseRef}>
           <span
-            className={`dropdown-label ${expandedMenu === 'rise' ? 'active' : ''}`}
+            className={`nav-text dropdown-label ${expandedMenu === 'rise' ? 'active' : ''}`}
             onClick={() => setExpandedMenu(expandedMenu === 'rise' ? null : 'rise')}
           >
             RISE+
           </span>
           {expandedMenu === 'rise' && (
             <ul className="dropdown-menu vertical no-background">
-              <li><NavLink to="/app/appli-mobile">Application Mobile</NavLink></li>
-              <li><NavLink to="/app/partenaires">Partenaires</NavLink></li>
-              <li><NavLink to="/app/salle-trophees">Trophées</NavLink></li>
+              <li><NavLink to="/app/appli-mobile" className="nav-text">Application Mobile</NavLink></li>
+              <li><NavLink to="/app/partenaires" className="nav-text">Partenaires</NavLink></li>
+              <li><NavLink to="/app/salle-trophees" className="nav-text">Trophées</NavLink></li>
             </ul>
           )}
         </li>
 
         <li className="dropdown-wrapper" ref={aboutRef}>
           <span
-            className={`dropdown-label ${expandedMenu === 'about' ? 'active' : ''}`}
+            className={`nav-text dropdown-label ${expandedMenu === 'about' ? 'active' : ''}`}
             onClick={() => setExpandedMenu(expandedMenu === 'about' ? null : 'about')}
           >
             À PROPOS
           </span>
           {expandedMenu === 'about' && (
             <ul className="dropdown-menu vertical no-background">
-              <li><NavLink to="/app/qui-sommes-nous">Qui sommes-nous ?</NavLink></li>
-              <li><NavLink to="/app/nous-contacter">Nous contacter</NavLink></li>
+              <li><NavLink to="/app/qui-sommes-nous" className="nav-text">Qui sommes-nous ?</NavLink></li>
+              <li><NavLink to="/app/nous-contacter" className="nav-text">Nous contacter</NavLink></li>
             </ul>
           )}
         </li>

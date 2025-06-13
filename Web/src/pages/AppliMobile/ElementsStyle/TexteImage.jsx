@@ -34,11 +34,11 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     padding: '60px 20px 20px',
-    backgroundColor: '#ECECEC',
+    backgroundColor: 'transparent', // ✅ Laisse le fond décidé par le style global
   },
   container: {
     display: 'flex',
-    flexDirection: 'row', // ✅ côte à côte
+    flexDirection: 'row', 
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     maxWidth: '1200px',

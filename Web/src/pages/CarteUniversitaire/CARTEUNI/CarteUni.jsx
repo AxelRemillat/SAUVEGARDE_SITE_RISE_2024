@@ -74,7 +74,7 @@ function CarteUni() {
         position: "relative",
         width: "100vw",
         height: "100vh",
-        backgroundColor: "#ECECEC",
+        backgroundColor: "transparent",  // ✅ Laisse index.css gérer le fond
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -82,7 +82,6 @@ function CarteUni() {
     >
       {isLoaded && (
         <div id="map-container" style={containerStyle}>
-          {/* ✅ IntroScreen maintenant dans la carte */}
           {showIntro && <IntroScreen onStart={startAdventure} />}
 
           <GoogleMap
