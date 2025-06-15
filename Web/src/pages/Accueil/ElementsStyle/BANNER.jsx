@@ -10,7 +10,7 @@ import img5 from '../../../assets/ImagesAccueil_backup/STUDY.avif';
 const images = [
   { 
     src: img2, 
-    text: <>Prêt à voyager avec <span style={{ color: '#ee0d0d' }}>RISE</span></> 
+    text: <>Bienvenue chez  <span style={{ color: '#ee0d0d' }}>RISE</span></> 
   },
   { src: img3, text: <span><span style={{ color: '#ee0d0d' }}>R</span>EACH</span> },
   { src: img4, text: <span><span style={{ color: '#ee0d0d' }}>I</span>NSPIRE</span> },
@@ -35,7 +35,7 @@ const AccueilBanner = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => nextSlide(), 9000);
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer);  
   }, [index]);
 
   return (
@@ -46,7 +46,7 @@ const AccueilBanner = () => {
           <div style={styles.slideText}>
             {img.text}
             {i === 0 && prenom && (
-              <div>{prenom} ?</div>
+              <div>{prenom} </div>
             )}
           </div>
         </div>
