@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../assets/ImagesAccueil_backup/logo.png';
+import ProfileMenu from './profileMenu/ProfileMenu';
+// On importe notre nouveau composant
 
 const Navbar = () => {
   const [expandedMenu, setExpandedMenu] = useState(null);
@@ -20,6 +22,14 @@ const Navbar = () => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Exemple d'image de profil (remplace par ton image dynamique si besoin)
+  const profilePicUrl = 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y'; 
+
+  const handleLogout = () => {
+    console.log("Déconnexion en cours...");
+    // Ajoute ici ta logique de déconnexion
+  };
 
   return (
     <nav className="navbar" style={{ paddingLeft: '40px' }}>
@@ -79,6 +89,14 @@ const Navbar = () => {
               <li><NavLink to="/app/nous-contacter" className="nav-text">Nous contacter</NavLink></li>
             </ul>
           )}
+        </li>
+
+        {/* Le bouton profil ajouté ici */}
+        <li>
+          <ProfileMenu
+            profilePic={profilePicUrl}
+            onLogout={handleLogout}
+          />
         </li>
       </ul>
     </nav>
