@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Footer.css';
-import logo from '../../assets/ImagesAccueil_backup/logo.png';
+import logo from '../../../assets/ImagesAccueil_backup/logo.png';
 
 const Footer = () => {
   const [modalType, setModalType] = useState(null);

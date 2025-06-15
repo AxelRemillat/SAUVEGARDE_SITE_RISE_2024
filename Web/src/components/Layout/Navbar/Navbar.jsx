@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Navbar.css';
-import logo from '../../assets/ImagesAccueil_backup/logo.png';
-import ProfileMenu from './profileMenu/ProfileMenu';
+import logo from '../../../assets/ImagesAccueil_backup/logo.png';
+import ProfileMenu from '../profileMenu/ProfileMenu';
 // On importe notre nouveau composant
 
 const Navbar = () => {

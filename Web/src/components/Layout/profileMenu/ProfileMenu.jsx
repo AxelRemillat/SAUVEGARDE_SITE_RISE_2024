@@ -1,3 +1,7 @@
+// le pztit logo dans navbar en  haut à droite qui permet de log out
+
+
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
