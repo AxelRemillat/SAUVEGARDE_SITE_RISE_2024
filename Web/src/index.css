@@ -58,3 +58,27 @@ button:focus-visible {
   transform: scale(2) translateY(-100%);
   opacity: 0;
 }
+
+/* Light theme (utile si dark mode activé ailleurs) */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+
+  a:hover {
+    color: #747bff;
+  }
+
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Supprimer l'icône native "oeil" ou "auto-fill" dans les champs input */
+input::-ms-reveal,
+input::-ms-clear,
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}

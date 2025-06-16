@@ -24,6 +24,7 @@ const Signup = () => {
   const [paysOptions, setPaysOptions] = useState([]);
   const [paysValid, setPaysValid] = useState(false);
   const navigate = useNavigate();
+  const [hovered, setHovered] = useState(false);
 
   const handleChange = async (e) => {
     const { name, value } = e.target;
@@ -161,6 +162,18 @@ const Signup = () => {
 
   return (
     <div style={styles.background}>
+        <button
+          onClick={() => navigate(-1)}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          style={{
+            ...styles.backButton,
+            transform: hovered ? 'scale(1.07)' : 'scale(1)',
+            backgroundColor: hovered ? '#eee' : '#ffffff',
+          }}
+        >
+          ← Retour
+        </button>
       <div style={styles.container}>
         <h2 style={styles.title}>
           <span style={{ color: '#4b0082', fontWeight: 'bold' }}>Créer un compte</span>{' '}
@@ -184,7 +197,8 @@ const Signup = () => {
               value={formData[name]}
               onChange={handleChange}
               style={styles.input}
-              autoComplete="off"
+              autoComplete="new-password"
+              inputMode="text"
             />
             {name === 'password' && (
               <span onClick={() => setShowPassword((p) => !p)} style={styles.toggle}>
@@ -296,6 +310,24 @@ const styles = {
     padding: '10px',
     cursor: 'pointer',
   },
+
+  backButton: {
+  position: 'fixed',
+  bottom: '25px',
+  left: '25px',
+  backgroundColor: '#ffffff',
+  color: '#4b0082',
+  border: 'none',
+  fontSize: '18px',
+  fontWeight: 'bold',
+  padding: '12px 20px',
+  borderRadius: '10px',
+  cursor: 'pointer',
+  boxShadow: '0px 0px 12px rgba(0, 0, 0, 0.25)',
+  zIndex: 1000,
+  transition: 'transform 0.2s ease, background-color 0.2s ease',
+  },
+
 };
 
 export default Signup;
