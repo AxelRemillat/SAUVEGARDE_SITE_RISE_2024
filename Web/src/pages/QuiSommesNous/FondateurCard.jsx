@@ -37,22 +37,23 @@ const Fondateurs = () => {
       <h2 style={styles.title}>4 Fondateurs :</h2>
       <div style={styles.grid}>
         <FondateurCard
-          image={leonie}
-          nom="Schmit Léonie"
-          role="Fondatrice, responsable du projet et stratégie"
-          linkedin="https://linkedin.com/in/leonie-schmit-7248b5259"
-        />
-        <FondateurCard
           image={mathis}
           nom="Levrot Mathis"
           role="Développeur web et designer, codeur"
           linkedin="https://linkedin.com/in/mathis-levrot-ba2110252/"
         />
+       
         <FondateurCard
           image={axel}
           nom="Remillat Axel"
           role="Développeur de la carte universitaire, codeur et designer"
           linkedin="https://linkedin.com/in/axel-remillatesmelyon"
+        />
+         <FondateurCard
+          image={leonie}
+          nom="Schmit Léonie"
+          role="Fondatrice, responsable du projet et stratégie"
+          linkedin="https://linkedin.com/in/leonie-schmit-7248b5259"
         />
         <FondateurCard
           image={tanguy}

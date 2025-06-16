@@ -32,7 +32,7 @@ const styles = {
   body: {
     margin: 0,
     padding: 0,
-    backgroundColor: '#ececec',
+    backgroundColor: 'transparent', // ✅ Laisse index.css décider du fond
     fontFamily: 'Arial, sans-serif',
     minHeight: '100vh',
     position: 'relative',
@@ -40,49 +40,46 @@ const styles = {
     overflowX: 'hidden',
   },
 
-  // ✅ Image décorative gauche agrandie
   image1: {
     position: 'absolute',
-    width: '40%',         // ↗️ taille augmentée
-    height: '40vh',       // ↗️ hauteur augmentée
+    width: '40%',
+    height: '40vh',
     backgroundImage:
       "url('https://primary.jwwb.nl/public/g/c/w/temp-pdlrlsxjwvkbgyallwla/capture_d_-cran_2025-01-12_214534-removebg-preview-high.png')",
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    top: '100px',         // repositionnement si besoin
+    top: '100px',
     left: '30px',
     zIndex: -1,
     transform: 'rotate(10deg)',
   },
 
-  // ✅ Image décorative droite agrandie
   image2: {
     position: 'absolute',
-    width: '40%',         // ↗️ taille augmentée
-    height: '40vh',       // ↗️ hauteur augmentée
+    width: '40%',
+    height: '40vh',
     backgroundImage:
       "url('https://primary.jwwb.nl/public/g/c/w/temp-pdlrlsxjwvkbgyallwla/capture_d_-cran_2025-01-12_214534-removebg-preview-high.png')",
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
-    top: '100px',         // même top pour alignement
+    top: '100px',
     right: '0',
     zIndex: -1,
     transform: 'rotate(-15deg)',
   },
 
-  // ✅ Bloc de texte agrandi (cadrant et texte)
   box: {
     border: '1px solid #ddd',
     borderRadius: '12px',
-    padding: '30px',           // ↗️ padding augmenté
+    padding: '30px',
     backgroundColor: '#ffffff',
-    fontSize: '20px',          // ↗️ taille de police augmentée
+    fontSize: '20px',
     lineHeight: 1.7,
     color: '#333',
-    maxWidth: '900px',         // ↗️ largeur maximale augmentée
-    margin: '100px auto 0px auto',  // ⬇️ marge basse réduite à 5px
+    maxWidth: '900px',
+    margin: '100px auto 0px auto',
     boxShadow: '0 8px 18px rgba(0, 0, 0, 0.1)',
     fontWeight: 'bold',
     position: 'relative',
@@ -90,7 +87,6 @@ const styles = {
     transition: 'transform 0.3s, box-shadow 0.3s',
   },
 
-  // ✅ Décoration vague en bas
   bottomDeco: {
     width: '100%',
     height: '200px',
@@ -98,7 +94,7 @@ const styles = {
     backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center bottom',
-    marginTop: '40px', // marge réduite au-dessus
+    marginTop: '40px',
   },
 };
 

@@ -42,16 +42,20 @@ const Login = () => {
       const userCredential = await signIn(formData.email, formData.password);
       const user = userCredential.user;
 
+      // Récupération des données Firestore avant la navigation
       const docRef = doc(db, 'Users', user.uid);
       const docSnap = await getDoc(docRef);
+
       if (docSnap.exists()) {
         const data = docSnap.data();
-        const role = data.role || 'Utilisateur';
-        console.log('Connexion réussie - rôle :', role);
+        const fullName = `${data.prenom} ${data.nom}`; // Ajuste si nécessaire
+        sessionStorage.setItem('fullName', fullName);
+        console.log(`Connexion réussie - Rôle : ${data.role || 'Utilisateur'}`);
       }
 
       sessionStorage.setItem('introSeen', 'true');
       navigate('/app');
+
     } catch (err) {
       const code = err.code;
       if (code === 'auth/user-not-found') {
@@ -109,10 +113,9 @@ const Login = () => {
           </button>
 
           <button
-
             onClick={() => setAdminMode(true)}
             style={{
-              backgroundColor: '#c0392b', 
+              backgroundColor: '#c0392b',
               color: 'white',
               padding: '8px 12px',
               fontSize: '14px',
@@ -121,12 +124,13 @@ const Login = () => {
               fontWeight: 'bold',
               cursor: 'pointer',
               marginTop: '10px',
-              width: '150px', 
+              width: '150px',
               alignSelf: 'center'
             }}
-          >       
+          >
             Compte Admin
           </button>
+
           {adminMode && (
             <>
               <input
@@ -142,7 +146,7 @@ const Login = () => {
                 style={{ ...styles.button, backgroundColor: '#6a0dad' }}
                 onClick={() => {
                   if (adminCode === '654321') {
-                    sessionStorage.setItem('introSeen', 'true'); 
+                    sessionStorage.setItem('introSeen', 'true');
                     navigate('/app');
                   } else {
                     setAdminError('Code incorrect.');
@@ -153,7 +157,6 @@ const Login = () => {
               </button>
             </>
           )}
-
         </div>
       </div>
       <button
