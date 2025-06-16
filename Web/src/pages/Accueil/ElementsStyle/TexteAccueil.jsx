@@ -27,7 +27,7 @@ const TexteAccueil = () => {
 const styles = {
   container: {
     padding: '30px',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: 'transparent', // ✅ Laisse le fond décidé par le style global
     display: 'flex',
     flexDirection: 'column',
     gap: '40px',

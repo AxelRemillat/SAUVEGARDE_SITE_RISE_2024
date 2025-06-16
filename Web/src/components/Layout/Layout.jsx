@@ -1,7 +1,10 @@
+// est appelé dans apps c'est ce qui gére tout ce qui est présent partout
+
+
 import React, { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Navbar from './Navbar/Navbar';
+import Footer from './footer/Footer';
 
 const Layout = () => {
   const navigate = useNavigate();

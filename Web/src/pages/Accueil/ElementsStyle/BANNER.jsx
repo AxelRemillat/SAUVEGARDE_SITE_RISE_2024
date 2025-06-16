@@ -7,9 +7,11 @@ import img3 from '../../../assets/ImagesAccueil_backup/REACH.jpg';
 import img4 from '../../../assets/ImagesAccueil_backup/INSPIRE.jpg';
 import img5 from '../../../assets/ImagesAccueil_backup/STUDY.avif';
 
-// Tableau des slides avec texte
 const images = [
-  { src: img2, text: <>Crée ta propre aventure<br />avec <span style={{ color: '#ee0d0d' }}>RISE !</span></> },
+  { 
+    src: img2, 
+    text: <>Bienvenue chez  <span style={{ color: '#ee0d0d' }}>RISE</span></> 
+  },
   { src: img3, text: <span><span style={{ color: '#ee0d0d' }}>R</span>EACH</span> },
   { src: img4, text: <span><span style={{ color: '#ee0d0d' }}>I</span>NSPIRE</span> },
   { src: img5, text: <span><span style={{ color: '#ee0d0d' }}>S</span>TUDY</span> },
@@ -18,14 +20,22 @@ const images = [
 
 const AccueilBanner = () => {
   const [index, setIndex] = useState(0);
+  const [prenom, setPrenom] = useState('');
+
+  useEffect(() => {
+    const fullName = sessionStorage.getItem('fullName');
+    if (fullName) {
+      const prenomOnly = fullName.split(' ')[0];
+      setPrenom(prenomOnly);
+    }
+  }, []);
 
   const nextSlide = () => setIndex((prev) => (prev + 1) % images.length);
   const prevSlide = () => setIndex((prev) => (prev - 1 + images.length) % images.length);
 
   useEffect(() => {
-    console.log("Banner loaded");
     const timer = setTimeout(() => nextSlide(), 9000);
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer);  
   }, [index]);
 
   return (
@@ -33,9 +43,15 @@ const AccueilBanner = () => {
       {images.map((img, i) => (
         <div key={i} style={{ ...styles.slide, opacity: index === i ? 1 : 0 }}>
           <img src={img.src} alt={`Slide ${i}`} style={styles.image} />
-          <div style={styles.slideText}>{img.text}</div>
+          <div style={styles.slideText}>
+            {img.text}
+            {i === 0 && prenom && (
+              <div>{prenom} </div>
+            )}
+          </div>
         </div>
       ))}
+
       <button style={{ ...styles.navArrow, ...styles.prev }} onClick={prevSlide}>&#10094;</button>
       <button style={{ ...styles.navArrow, ...styles.next }} onClick={nextSlide}>&#10095;</button>
     </div>
@@ -49,7 +65,7 @@ const styles = {
     height: '550px',
     overflow: 'hidden',
     fontFamily: 'Open Sans, sans-serif',
-    backgroundColor: 'black' // Pour vérifier si le bloc s'affiche
+    backgroundColor: 'black'
   },
   slide: {
     position: 'absolute',
