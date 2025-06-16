@@ -83,3 +83,9 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+input::-ms-reveal,
+input::-ms-clear,
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
