@@ -86,7 +86,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     padding: '60px 20px 20px',
-    backgroundColor: '#ECECEC',
+    backgroundColor: 'transparent', // ✅ Laisse le fond décidé par le style global
   },
   container: {
     display: 'flex',
