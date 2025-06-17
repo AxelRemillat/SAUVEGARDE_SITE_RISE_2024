@@ -1,50 +1,32 @@
-:root {
+/* Réinitialisation globale */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100vh;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: #213547;
+  background: #fff; /* Fond blanc par défaut */
 }
 
+/* Permet de désactiver le fond blanc lorsqu'une page impose son propre fond */
+body.custom-background {
+  background: none; 
+}
+
+/* Liens */
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  /* Supprimé : display: flex; place-items: center; */
-}
-body {
-  user-select: none;    /* y avait un problmème ou le texte avait un cuersor de sélection je l'est donc enlevé */
-  cursor: default;
-}
-
-
-#root {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+/* Boutons */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -52,34 +34,51 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f9f9f9;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* Intro screen de la carte uni  */
+/* Wrapper principal (si tu en as un) */
+.main-content, .content-wrapper {
+  background: #fff; /* Assure le fond blanc même si un wrapper existe */
+}
+
+/* Pour l'intro screen de ta carte */
 .intro-screen.hide {
   transform: scale(2) translateY(-100%);
   opacity: 0;
 }
 
-
+/* Light theme (utile si dark mode activé ailleurs) */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* Supprimer l'icône native "oeil" ou "auto-fill" dans les champs input */
+input::-ms-reveal,
+input::-ms-clear,
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  display: none !important;
 }

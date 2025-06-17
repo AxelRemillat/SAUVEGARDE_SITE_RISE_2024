@@ -22,7 +22,7 @@ const Banner = ({ text }) => {
     fontSize: '3.5em',
     fontWeight: 'bold',
     overflow: 'hidden',
-    animation: 'fadeIn 1s ease-in-out'
+    //animation: 'fadeIn 1s ease-in-out'
   };
 
   const textStyle = {
