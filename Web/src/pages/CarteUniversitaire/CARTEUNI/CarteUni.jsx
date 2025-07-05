@@ -72,8 +72,8 @@ function CarteUni() {
     <div
       style={{
         position: "relative",
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        minHeightnt: "100vh",
         backgroundColor: "transparent",  // ✅ Laisse index.css gérer le fond
         display: "flex",
         justifyContent: "center",
