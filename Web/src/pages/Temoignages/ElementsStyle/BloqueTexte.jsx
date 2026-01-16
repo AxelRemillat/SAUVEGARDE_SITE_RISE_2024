@@ -8,7 +8,7 @@ const TexteTemoignages = () => {
       <div style={styles.image2}></div>
 
       {/* Bloc texte */}
-      <div style={styles.box}>
+      <div className="rise-text" style={styles.box}>
         <b>
           Découvrez les récits captivants de nos étudiants qui explorent les
           quatre coins du monde ! De l'Asie à l'Amérique du Sud, laissez-vous
@@ -75,13 +75,9 @@ const styles = {
     borderRadius: '12px',
     padding: '30px',
     backgroundColor: '#ffffff',
-    fontSize: '20px',
-    lineHeight: 1.7,
-    color: '#333',
     maxWidth: '900px',
     margin: '100px auto 0px auto',
     boxShadow: '0 8px 18px rgba(0, 0, 0, 0.1)',
-    fontWeight: 'bold',
     position: 'relative',
     zIndex: 1,
     transition: 'transform 0.3s, box-shadow 0.3s',
