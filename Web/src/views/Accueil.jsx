@@ -15,3 +15,4 @@ const Accueil = () => {
 };
 
 export default Accueil;
+// FINAL NAVBAR VERSION
