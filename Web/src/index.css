@@ -10,6 +10,38 @@ html, body {
   background: #fff; /* Fond blanc par défaut */
 }
 
+:root {
+  --rise-font-family: 'Arial, sans-serif';
+  --rise-text-color: #333333;
+  --rise-muted-color: #555555;
+  --rise-text-size: 18px;
+  --rise-mini-title-size: 28px;
+  --rise-line-height: 1.8;
+}
+
+.rise-text {
+  font-family: var(--rise-font-family);
+  font-size: var(--rise-text-size);
+  line-height: var(--rise-line-height);
+  color: var(--rise-text-color);
+}
+
+.rise-text-muted {
+  color: var(--rise-muted-color);
+}
+
+.rise-mini-title {
+  font-family: var(--rise-font-family);
+  font-size: var(--rise-mini-title-size);
+  font-weight: 700;
+  line-height: var(--rise-line-height);
+  color: var(--rise-text-color);
+}
+
+.rise-mini-title-muted {
+  color: var(--rise-muted-color);
+}
+
 /* Permet de désactiver le fond blanc lorsqu'une page impose son propre fond */
 body.custom-background {
   background: none; 
