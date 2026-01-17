@@ -6,6 +6,7 @@
   gap: 100px; /* ↔️ Plus d’espace entre les cartes */
   padding: 60px 30px;
   background-color: transparent; /* ✅ Laisse index.css ou page décider du fond */
+  margin-top: 80px; /* espace entre la bannière et les cartes — ajuste la valeur si besoin */
 }
 
 .info-card {

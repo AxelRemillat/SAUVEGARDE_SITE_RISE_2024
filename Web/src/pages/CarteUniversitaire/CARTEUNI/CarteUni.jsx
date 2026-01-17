@@ -17,7 +17,7 @@ const containerStyle = {
   borderRadius: "15px",
   boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
   maxWidth: "1200px",
-  margin: "0 auto",
+  margin: "40px auto 0 auto", // ⬅️ Add margin-top (e.g. 40px)
   position: "relative",
 };
 
@@ -72,8 +72,8 @@ function CarteUni() {
     <div
       style={{
         position: "relative",
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        minHeightnt: "100vh",
         backgroundColor: "transparent",  // ✅ Laisse index.css gérer le fond
         display: "flex",
         justifyContent: "center",
