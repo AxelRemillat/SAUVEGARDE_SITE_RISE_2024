@@ -90,7 +90,6 @@ const styles = {
     maxWidth: '1050px', // ⬅️ was 900px, now slightly wider
     margin: '100px auto 0px auto',
     boxShadow: '0 8px 18px rgba(0, 0, 0, 0.1)',
-    fontWeight: 'bold',
     position: 'relative',
     zIndex: 1,
     transition: 'transform 0.3s, box-shadow 0.3s',
