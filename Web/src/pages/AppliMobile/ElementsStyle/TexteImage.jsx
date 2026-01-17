@@ -6,14 +6,14 @@ const TexteImage = () => {
       <div style={styles.container}>
         {/* Texte à gauche */}
         <div style={styles.textBox}>
-          <h3 className="rise-mini-title" style={styles.title}>Découvrez l'application mobile</h3>
-          <p className="rise-text" style={styles.paragraph}>
+          <h3 style={styles.title}>Découvrez l'application mobile</h3>
+          <p style={styles.paragraph}>
             <strong>Interactivité :</strong> Partagez vos avis et découvrez les recommandations de vos pairs grâce à une carte interactive intuitive, le tout depuis votre appareil mobile.
           </p>
-          <p className="rise-text" style={styles.paragraph}>
+          <p style={styles.paragraph}>
             <strong>Accessibilité :</strong> Accédez à des informations actualisées sur les universités et les témoignages d'étudiants, où que vous soyez et à tout moment, directement depuis votre smartphone, sans nécessiter l'utilisation d'un ordinateur.
           </p>
-          <p className="rise-text" style={styles.paragraph}>
+          <p style={styles.paragraph}>
             <strong>Simplicité :</strong> Profitez d'une interface intuitive et facile à naviguer, rendant la recherche d'informations et la contribution plus agréables.
           </p>
         </div>
@@ -57,10 +57,16 @@ const styles = {
   },
   title: {
     color: '#204060',
+    fontSize: '28px',
+    fontWeight: '700',
     marginBottom: '20px',
   },
   paragraph: {
+    color: '#404040',
+    fontSize: '18px',
+    lineHeight: '1.8',
     textAlign: 'justify',
+    fontFamily: 'Arial, sans-serif',
     marginBottom: '18px',
   },
   image: {

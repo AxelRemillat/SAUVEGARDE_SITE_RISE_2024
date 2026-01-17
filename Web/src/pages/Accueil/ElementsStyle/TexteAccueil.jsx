@@ -4,8 +4,8 @@ const TexteAccueil = () => {
   return (
     <div style={styles.container}>
       <div style={styles.block}>
-        <h3 className="rise-mini-title" style={styles.title}>Objectif :</h3>
-        <p className="rise-text" style={styles.paragraph}>
+        <h3 style={styles.title}>Objectif :</h3>
+        <p style={styles.paragraph}>
           <strong>RISE</strong> est une plateforme collaborative dédiée aux étudiants, offrant des informations
           précieuses sur votre semestre à l’international tout en vous faisant découvrir des lieux incontournables,
           soigneusement recommandés par vos camarades d’école ! C'est un gain de temps et d'argent important pour vous !
@@ -13,8 +13,8 @@ const TexteAccueil = () => {
       </div>
 
       <div style={styles.block}>
-        <h3 className="rise-mini-title" style={styles.title}>Ce que tu peux trouver sur notre site :</h3>
-        <p className="rise-text" style={styles.paragraph}>
+        <h3 style={styles.title}>Ce que tu peux trouver sur notre site :</h3>
+        <p style={styles.paragraph}>
           Une carte universitaire regroupant toutes les informations essentielles sur chaque université.
           Des témoignages authentiques d’étudiants ayant déjà vécu l’expérience dans ta destination.
           Une carte interactive qui te permet de partager ton avis sur tous les lieux que tu as visités.
@@ -41,13 +41,19 @@ const styles = {
     maxWidth: '95%',
     width: '70%',
     margin: '0 auto',
+    fontFamily: 'Montserrat, sans-serif',
   },
   title: {
     color: '#c42727',
+    fontSize: '32px',
+    fontWeight: '700',
     marginBottom: '15px',
     textAlign: 'center',
   },
   paragraph: {
+    fontSize: '20px',
+    lineHeight: '1.7',
+    color: '#333',
     textAlign: 'justify',
   },
 };
