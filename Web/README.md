@@ -1,54 +1,97 @@
-# React + TypeScript + Vite
+# RISE — Site Internet (Sauvegarde 2024)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Site web officiel de **RISE**, une plateforme dédiée aux étudiants souhaitant découvrir des opportunités académiques et d'échange à l'international.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Stack technique
 
-## Expanding the ESLint configuration
+- **React 19** + **TypeScript**
+- **Vite 6** (bundler / dev server)
+- **React Router DOM 7** (navigation)
+- **Firebase 11** (authentification + base de données)
+- **Google Maps API** (carte interactive des universités)
+- **Axios** (requêtes HTTP)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Pages du site
+
+| Route | Description |
+|---|---|
+| `/` | Page d'introduction / landing |
+| `/accueil` | Page d'accueil principale |
+| `/carte-universitaire` | Carte interactive des universités partenaires |
+| `/carte-interactive` | Carte monde interactive |
+| `/temoignages` | Témoignages d'étudiants |
+| `/qui-sommes-nous` | Présentation de l'équipe fondatrice |
+| `/nous-contacter` | Formulaire de contact |
+| `/appli-mobile` | Page présentation de l'application mobile |
+| `/partenaires` | Partenaires de RISE |
+| `/salle-trophees` | Salle des trophées (gamification) |
+
+---
+
+## Installation & lancement en local
+
+### Prérequis
+- Node.js 18+
+- npm
+
+### Installation
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### Configuration des variables d'environnement
+Crée un fichier `.env` à la racine du dossier `Web/` :
+```env
+VITE_GOOGLE_MAPS_API_KEY=ta_cle_google_maps_ici
 ```
+
+### Lancer le serveur de développement
+```bash
+npm run dev
+```
+Le site sera disponible sur [http://localhost:5173](http://localhost:5173)
+
+### Build de production
+```bash
+npm run build
+```
+
+---
+
+## Structure du projet
+
+```
+Web/
+├── src/
+│   ├── pages/          # Pages du site (une par route)
+│   ├── views/          # Composants view par page
+│   ├── components/     # Composants réutilisables (Navbar, Footer…)
+│   ├── data/           # Données statiques (universités, drapeaux…)
+│   ├── firebase.js     # Configuration Firebase
+│   └── App.jsx         # Routing principal
+├── public/
+├── functions/          # Firebase Cloud Functions
+└── vite.config.ts
+```
+
+---
+
+## Firebase
+
+Le projet utilise Firebase pour :
+- L'authentification des utilisateurs (email/password + vérification email)
+- La base de données Firestore
+
+La configuration Firebase se trouve dans `src/firebase.js`.
+
+---
+
+## Notes
+
+- Ce repo est une sauvegarde de la version 2024 du site RISE.
+- Le repo d'origine est hébergé sur le compte de MathisLevrot.
+- Ne jamais committer le fichier `.env` (clés API).
