@@ -1,5 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// HashRouter : le site est servi en statique depuis le portfolio Next.js
+// (public/rise-app/index.html) sans rewrites serveur. Le routage par hash évite
+// tout problème de base path / deep-link au rafraîchissement dans ce contexte.
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 // Pages principales
 import Layout from './components/Layout/Layout';
@@ -14,22 +17,16 @@ import Partenaires from './views/Partenaires';
 import SalleTrophees from './views/SalleTrophees';
 import Intro from './views/Intro';
 
-// Authentification
-import Login from './pages/Intro/Login.jsx';
-import Signup from './pages/Intro/Signup.jsx';
-import EmailVerification from './pages/Intro/EmailVerification.jsx';
+// Widget chatbot RAG RISE — présent en permanence (haut-droite) sur tout le site
+import ChatWidget from './components/ChatWidget/ChatWidget';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
+      <ChatWidget />
       <Routes>
-        {/* Page d'introduction */}
+        {/* Page d'introduction (choix invité / admin) */}
         <Route path="/" element={<Intro />} />
-
-        {/* Authentification */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/verify" element={<EmailVerification />} />
 
         {/* Application principale sous /app */}
         <Route path="/app" element={<Layout />}>
@@ -44,7 +41,7 @@ function App() {
           <Route path="salle-trophees" element={<SalleTrophees />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

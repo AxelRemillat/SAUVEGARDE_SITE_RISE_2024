@@ -7,6 +7,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
+  // Servi en statique depuis le portfolio Next.js sous /rise-app/ (public/rise-app).
+  base: '/rise-app/',
   plugins: [react()],
   resolve: {
     alias: {
